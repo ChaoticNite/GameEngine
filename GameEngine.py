@@ -60,8 +60,13 @@ def combat(one, two):
 
 if __name__ == "__main__":
     hero = Character()
-    orc = Monster(name = "Dorque da Orc")
+    enemy = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
+                  stamina = ngStamina, strength = ngStrength,
+                  intelligence = ngIntelligence, dexterity = ngDexterity,
+                  numberOfPotions = ngNumberOfPotions, inventory = ngInventory,
+                  aggression = ngAggression, awareness = ngAwareness,
+                  fear = ngFear)
 
-    combat(hero, orc)
+    combat(hero, enemy)
 
     

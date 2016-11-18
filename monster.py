@@ -3,6 +3,7 @@
 # 11/16/2016
 
 ''' Monster Package '''
+from namegene import *
 from character import *
 from random import randint, choice
 
@@ -83,9 +84,14 @@ def random_monster():
 
 if __name__ == "__main__":
 
-    Grr = Monster(name = "Freddy")
+    Grr = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
+                  stamina = ngStamina, strength = ngStrength,
+                  intelligence = ngIntelligence, dexterity = ngDexterity,
+                  numberOfPotions = ngNumberOfPotions, inventory = ngInventory,
+                  aggression = ngAggression, awareness = ngAwareness,
+                  fear = ngFear)
     Randy = random_monster()
-    print(Randy.name)
+    print(Grr.name, Grr.maxHealth, Grr.strength, Grr.aggression, Grr.awareness, Grr.fear)
 
 
     
