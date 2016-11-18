@@ -8,7 +8,7 @@ from random import randint
 
 adjectName = ["Kind", "Average", "Lazy", "Noble", "Aggressive", "Boss",
              "Zesty", "Unbeatable"]
-nameSpecies = ["Orc", "Minotaur", "Raptor", "Kobold", "Wolysion", "Tarawin"]
+nameSpecies = ["Moblin", "Minotaur", "Raptor", "Kobold", "Wolysion", "Tarawin"]
 
 
 namePart1 = random.randint(1, 8)

@@ -29,12 +29,17 @@ class Monster(Character):
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
 
+        adject, species = ngName.split(' ')
+
     def combat_choice(self):
         ''' combat AI
 
             returns a, h, or f.  Based on aggression, awareness, morale
             
             '''
+
+        
+        
         attackValue = randint(1,100) + self.aggression
         healValue = randint(1,100) + self.awareness
         fleeValue = randint(1,100) + self.fear

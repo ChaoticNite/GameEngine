@@ -25,7 +25,7 @@ from items import *
 class Character(object):
     ''' Base Character Class '''
     def __init__(self,
-                 name = "Average Joe",
+                 name = "Legend Lank",
                  maxHealth = 10,
                  speed = 25,
                  stamina = 25,
@@ -166,6 +166,21 @@ class Character(object):
             message = self.name + " misses " + enemy.name + "."
 
         return success, message
+    
+    def take(self, enemy):
+        ''' Takes a potion from the enemy
+
+            Moblin, Kobold only choice.'''
+        success = False
+        message = ""
+
+        if randint(1,5) > 3:
+            if enemy.potions > 0:
+                enemy.potions = enemy.potions - 1
+                self.potions = self.potions + 1
+                
+            else:
+        
 
     def combat_choice(self):
         ''' player's combat choices'''
