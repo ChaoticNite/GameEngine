@@ -19,13 +19,14 @@
         see the property docstrings for more information
 
 '''
+from namegene import *
 from random import randint
 from items import *
 
 class Character(object):
     ''' Base Character Class '''
     def __init__(self,
-                 name = "Legend Lank",
+                 name = "Legendary Lank",
                  maxHealth = 10,
                  speed = 25,
                  stamina = 25,
@@ -158,6 +159,8 @@ class Character(object):
         attack = randint(1,20) + self.strBonus + self.weapon.attack
         if attack >= enemy.AC:
             damage = self.weapon.damage + self.strBonus
+            if damage < 1:
+                damage = 1
             enemy.health -= damage
             success = True
             message = self.name + " hits " + enemy.name + " and does " +\
@@ -178,8 +181,15 @@ class Character(object):
             if enemy.potions > 0:
                 enemy.potions = enemy.potions - 1
                 self.potions = self.potions + 1
-                
+                success = True
+                message = self.name + " has stolen a potion from " + enemy.name
             else:
+                message = enemy.name + " had nothing to steal!"
+        else:
+            message = self.name + " tried to steal an item, but can't stealth."
+        return success, message
+
+    def spare_talk(self, enemy):
         
 
     def combat_choice(self):

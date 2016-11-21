@@ -3,12 +3,45 @@
 # Noel Kling
 # November/17/16
 
+from monster import *
 import random
 from random import randint
 
 adjectName = ["Kind", "Average", "Lazy", "Noble", "Aggressive", "Boss",
              "Zesty", "Unbeatable"]
 nameSpecies = ["Moblin", "Minotaur", "Raptor", "Kobold", "Wolysion", "Tarawin"]
+
+class Moblin(Monster):
+    ''' a greedy violent creature '''
+    def __init__(self,
+                 ngName = "da Moblin"
+                 ngSpeed = 25
+                 ngStamina = 25
+                 ngStrength = 8
+                 ngIntelligence = 8
+                 ngDexterity = 8
+                 ngNumberOfPotions = 2
+                 ngInventory = []
+                 ngAggression = 80
+                 ngAwareness = 30
+                 ngFear = 20
+                 ngMXHealth = 100):
+        super(Moblin, self).(ngName, ngMXHealth, ngSpeed, ngStamina, ngStrength,
+                             ngIntelligence, ngDexterity, ngNumberOfPotions,
+                             ngInventory, ngAggression, ngAwareness, ngFear)
+
+        def combat_choice(self):
+            ''' combat AI
+
+                returns a, h, t, or f. Based on aggression, awareness, morale
+                and intelligence.
+
+                '''
+            if 
+
+            
+
+    
 
 
 namePart1 = random.randint(1, 8)

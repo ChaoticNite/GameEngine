@@ -37,8 +37,7 @@ class Monster(Character):
             returns a, h, or f.  Based on aggression, awareness, morale
             
             '''
-
-        
+               
         
         attackValue = randint(1,100) + self.aggression
         healValue = randint(1,100) + self.awareness
@@ -82,6 +81,7 @@ def random_monster():
     
     monster = Monster()
     orc = Orc()
+    
     
     listOfMonsters = [monster, orc]
     return choice(listOfMonsters)
