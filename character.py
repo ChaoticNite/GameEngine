@@ -41,7 +41,9 @@ class Character(object):
                  wisdom = 10,
                  charisma = 10,
                  numberOfPotions = 2,
-                 inventory = []):
+                 inventory = [],
+                 weapon = "",
+                 armor = ""):
         ''' All values represent the average score '''
         self.name = name
         self.maxHealth = maxHealth
@@ -61,8 +63,14 @@ class Character(object):
         self.potions = []
         for i in range(numberOfPotions):
             self.potions.append(Potion())
-        self.weapon = Weapon()
-        self.armor = Armor()
+        if weapon == "":
+            self.weapon = Weapon()
+        else:
+            self.weapon = weapon
+        if armor == "":
+            self.armor = Armor()
+        else:
+            self.armor = armor
 
     @property
     def strBonus(self):
@@ -190,7 +198,7 @@ class Character(object):
             success = False
             message = self.name + "fumbles their attack!"
 
-<<<<<<< HEAD
+
         attack = randint(1,20) + self.strBonus + self.weapon.attack
         if attack >= enemy.AC:
             damage = self.weapon.damage + self.strBonus
@@ -200,8 +208,7 @@ class Character(object):
             success = True
             message = self.name + " hits " + enemy.name + " and does " +\
                       str(damage) + " damage."
-=======
->>>>>>> upstream/master
+
         else:
             attack = roll + self.strBonus + self.weapon.attack
             if attack >= enemy.AC:
@@ -236,7 +243,7 @@ class Character(object):
             message = self.name + " tried to steal an item, but can't stealth."
         return success, message
 
-    def spare_talk(self, enemy):
+    #def spare_talk(self, enemy):
         
 
     def combat_choice(self):

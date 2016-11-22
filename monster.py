@@ -80,6 +80,64 @@ class Orc(Monster):
                                   dexterity, constitution, intelligence,
                                   wisdom, charisma, numberOfPotions,
                                   inventory, aggression, awareness, fear)
+class Moblin(Monster):
+    
+    ''' a greedy violent creature ''' 
+    def __init__(self, firstPart = " ", name = " da Moblin"):
+        moblinName = fristPart + name
+        speed = 25
+        stamina = 25
+        strength = 8
+        intelligence = 8
+        dexterity = 8
+        numberOfPotions = 2
+        inventory = []
+        aggression = 80
+        awareness = 30
+        fear = 20
+        risk = 20
+        maxHealth = 100
+        super(Moblin, self).__init__(moblinName, maxHealth, speed, stamina,
+                                     strength, dexterity, intelligence,
+                                     numberOfPotions,
+                                     aggression, awareness, fear, risk)
+
+    def combat_choice(self):
+        ''' combat AI
+
+            returns a, h, t, or f. Based on aggression, awareness, morale
+            and intelligence.'''
+            
+        if intellinge > 8:
+            if awareness > 50:
+                stealValue = randint(1,100) + self.risk
+        else:
+            stealValue = 0
+
+        attackValue = randint(1,100) + self.aggression
+        healValue = randint(1,100) + self.awareness
+        fleeValue = randint(1,100) + self.fear
+            
+        if attackValue >= healValue and attackValue >= fleeValue and\
+            attackValue >= stealValue:
+            return "a"
+        elif stealValue >= attackValue and stealValue >= healValue and\
+              stealValue >= fleeValue:
+            return "t"
+        elif healValue >= attackValue and healValue >= fleeValue and\
+              healValue >= stealValue:
+            if self.numberOfPotions > 0:
+                return "h"
+            else:
+                return "t"
+        elif fleeValue >= attackValue and fleeValue >= healValue and\
+              fleeValue >= stealValue:
+            return "f"
+        else:
+            return "AI_error"
+                    
+
+                
 
 def random_monster():
     '''generate a monster at random
@@ -90,28 +148,15 @@ def random_monster():
     
     monster = Monster()
     orc = Orc()
+    moblin = Moblin()
     
     
-    listOfMonsters = [monster, orc]
+    listOfMonsters = [monster, orc, moblin]
     return choice(listOfMonsters)
 
 
 if __name__ == "__main__":
 
-<<<<<<< HEAD
-    Grr = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
-                  stamina = ngStamina, strength = ngStrength,
-                  intelligence = ngIntelligence, dexterity = ngDexterity,
-                  numberOfPotions = ngNumberOfPotions, inventory = ngInventory,
-                  aggression = ngAggression, awareness = ngAwareness,
-                  fear = ngFear)
-    Randy = random_monster()
-    print(Grr.name, Grr.maxHealth, Grr.strength, Grr.aggression, Grr.awareness, Grr.fear)
-=======
-    Grr = Orc(name = "Freddy")
-    #Randy = random_monster()
-    #print(Randy.name)
->>>>>>> upstream/master
 
-
-    
+    Randy = random_monster(firstPart = ngName, aggression )
+    print(Randy.name)   

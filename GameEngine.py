@@ -83,13 +83,47 @@ def create_player():
         return Character()
 
     def hardcore():
-        return Character()
+        ''' use 3d6, in order of state, no rerolls unless all under 13.
+
+            hardcore - results are generated randomly using the 3d6 method, in
+                standard stat block sequence: (str, dex, con, int, wis, cha).
+                if none of the stats are over 13, then the entire set is re-
+                rolled until it does. The user has no control over ability
+                scores. This method is the easiest, but usually has the least
+                satisfaction for the user.
+            '''
+        valid = False
+        while not valid:
+
+            gStrength = randint(3,18) 
+            gDexterity = randint(3,18)
+            gConstitution = randint(3,18)
+            gIntelligence = randint(3,18)
+            gWisdom = randint(3,18)
+            gCharisma = randint(3,18)
+            if gStrength > 11 or gDexterity > 11 or gConstitution > 11 or \
+               gIntelligence > 11 or gWisdom > 11 or gCharisma > 11:
+                valid = True
+        gName = input("What is your character's name? ")
+        gPotionCount = 0
+        gWeapon = Weapon(name = "stick", base = 3, bonus = 0)
+        gArmor = Armor(name = "Loincloth", base = 0, bonus = 0)
+        gHealth = randint(1,8)
+        return Character(name = gName, strength = gStrength,\
+                         dexterity = gDexterity, constitution = gConstitution,\
+                         intelligence = gIntelligence, wisdom = gWisdom,\
+                         charisma = gCharisma, numberOfPotions = gPotionCount,\
+                         weapon = gWeapon, armor = gArmor, maxHealth = gHealth)
 
     def four_d_six():
-        return Character()
+        return Character(name = gName, strength = gStrength,\
+                         dexterity = gDexterity, constitution = gConstitution,\
+                         intelligence = gIntelligence, wisdom = gWisdom,\
+                         charisma = gCharisma, numberOfPotions = gPotionCount,\
+                         weapon = gWeapon, armor = gArmor, maxHealth = gHealth)
 
     #main menu
-    satisfied = False
+      satisfied = False
     while not satisfied:
         valid = False
         while not valid:
@@ -131,7 +165,7 @@ def create_player():
     return player
 
 if __name__ == "__main__":
-<<<<<<< HEAD
+
     hero = Character()
     enemy = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
                   stamina = ngStamina, strength = ngStrength,
@@ -140,13 +174,14 @@ if __name__ == "__main__":
                   aggression = ngAggression, awareness = ngAwareness,
                   fear = ngFear)
 
-    combat(hero, enemy)
-=======
     hero = create_player()
+
+    combat(hero, enemy)
+
     #hero = Character()
     #orc = Monster(name = "Dorque da Orc")
 
     #combat(hero, orc)
->>>>>>> upstream/master
+
 
     
