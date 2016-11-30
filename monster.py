@@ -1,6 +1,13 @@
 # Monster.py
 # Thorin Schmidt
+# Edited by Noel Kling
 # 11/16/2016
+
+''' CHANGELOG: (11/30/16)
+    Adding pieces from the NameGene as individually classes so the generator
+    uses several different types of outcomes, will involve a sparing option
+    depending on attitude and monster.'''
+
 
 ''' Monster Package '''
 from namegene import *
@@ -33,7 +40,7 @@ class Monster(Character):
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
 
-        adject, species = ngName.split(' ')
+        #adject, species = ngName.split(' ')
 
     def combat_choice(self):
         ''' combat AI
@@ -80,7 +87,7 @@ class Orc(Monster):
                                   dexterity, constitution, intelligence,
                                   wisdom, charisma, numberOfPotions,
                                   inventory, aggression, awareness, fear)
-class Moblin(Monster):
+class Moblin(Character):
     
     ''' a greedy violent creature ''' 
     def __init__(self, firstPart = " ", name = " da Moblin"):
@@ -136,6 +143,71 @@ class Moblin(Monster):
         else:
             return "AI_error"
                     
+class Minotaur(Character):
+
+    ''' A Heavy Hitting type monster. '''
+    def __init__(self, firstPart = " ", name = " das Minotaur"):
+        minoName = fristPart + name
+        speed = 50
+        stamina = 40
+        strength = 15
+        intelligence = 2
+        dexterity = 9
+        numberOfPotions = 1
+        inventory = []
+        aggression = 95
+        awareness = 60
+        fear = 10
+        maxHealth = 60
+        super(Minotaur, self).__init__(minoName, maxHealth, speed, stamina,
+                                       strength, dexterity, intelligence,
+                                       numberOfPotions,
+                                       aggression, awareness, fear)
+
+    def combat_choice(self):
+        ''' Combat AI for Minotaur
+
+            Minotaurs are not know to be cowards and would never back down
+            from a fight.'''
+
+        
+        attackValue = randint(1,100) + self.aggression
+        healValue = randint(1,100) + self.awareness
+
+        if attackValue >= healValue and attackValue >= fleeValue:
+            return "a"
+        elif healValue >= attackValue and healValue >= fleeValue:
+            return "h"
+        else:
+            return "AI_error"
+
+class Raptor(Character):
+
+    ''' An intelligent creature that just happens to be a talking dinosaur.'''
+    def __init__(self, firstPart = " ", name = " le Raptor"):
+        rapName = firstPart + name
+        speed = 42
+        stamina = 30
+        strength = 8
+        intelligence = 12
+        dexterity = 5
+        numberOfPotions = 0
+        inventory = []
+        aggression = 92
+        awareness = 60
+        fear = 10
+        maxHealth = 60
+        super(Raptor, self).__init__(rapName, maxHealth, speed, stamina,
+                                       strength, dexterity, intelligence,
+                                       numberOfPotions,
+                                       aggression, awareness, fear)
+    def combat_choice(self):
+        ''' Combat AI for Raptor
+
+            They are able to be convinced that you aren't worth getting slaughtered.'''
+
+        
+
 
                 
 
@@ -149,6 +221,7 @@ def random_monster():
     monster = Monster()
     orc = Orc()
     moblin = Moblin()
+    minotaur = Minotaur()
     
     
     listOfMonsters = [monster, orc, moblin]
@@ -157,6 +230,7 @@ def random_monster():
 
 if __name__ == "__main__":
 
-
-    Randy = random_monster(firstPart = ngName, aggression )
-    print(Randy.name)   
+    grr = Orc()
+    
+    #Randy = random_monster(firstPart = ngName, aggression )
+    #print(Randy.name)

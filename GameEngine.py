@@ -73,7 +73,7 @@ def create_player():
                 rolled until it does. The user has no control over ability
                 scores. This method is the easiest, but usually has the least
                 satisfaction for the user.
-            4d6, keep best three, arrange to suit - 6 sets of 4d6 are rolled,
+            4d6 - keep best three, arrange to suit - 6 sets of 4d6 are rolled,
                 in each set, the top three dice are kept and added together.
                 Then these scores are assigned by the user. This method usually
                 has the highest satisfaction for the player, but is also the
@@ -116,16 +116,42 @@ def create_player():
                          weapon = gWeapon, armor = gArmor, maxHealth = gHealth)
 
     def four_d_six():
-        return Character(name = gName, strength = gStrength,\
+        ''' use 4d6, in order of state, rerolls unless two stats are higher than 16
+
+                4d6 -  keep best three, arrange to suit - 6 sets of 4d6 are rolled,
+                in each set, the top three dice are kept and added together.
+                Then these scores are assigned by the user. This method usually
+                has the highest satisfaction for the player, but is also the
+                most complicated, due to the many choices required.'''
+
+       valid = False
+       while not valid:
+
+           gStrength = randint(3,18) 
+           gDexterity = randint(3,18)
+           gConstitution = randint(3,18)
+           gIntelligence = randint(3,18)
+           gWisdom = randint(3,18)
+           gCharisma = randint(3,18)
+           if gStrength > 11 or gDexterity > 11 or gConstitution > 11 or \
+              gIntelligence > 11 or gWisdom > 11 or gCharisma > 11:
+               valid = True
+       gName = input("What is your character's name? ")
+       gPotionCount = 0
+       gWeapon = Weapon(name = "stick", base = 3, bonus = 0)
+       gArmor = Armor(name = "Loincloth", base = 0, bonus = 0)
+       gHealth = randint(1,8) 
+                  
+       return Character(name = gName, strength = gStrength,\
                          dexterity = gDexterity, constitution = gConstitution,\
                          intelligence = gIntelligence, wisdom = gWisdom,\
                          charisma = gCharisma, numberOfPotions = gPotionCount,\
                          weapon = gWeapon, armor = gArmor, maxHealth = gHealth)
 
     #main menu
-      satisfied = False
-    while not satisfied:
-        valid = False
+        satisfied = False
+        while not satisfied:
+            valid = False
         while not valid:
             choice = input('''
                              Character Creation Menu
@@ -142,7 +168,7 @@ def create_player():
                 print("*** Invalid Input! ***\n\n")
         if choice == '4':
             help(create_player)
-            continue
+            #continue
         elif choice == '3':
             player = four_d_six()
         elif choice == '2':
@@ -162,11 +188,10 @@ def create_player():
         if happyNow == 'y':
             satisfied = True
 
-    return player
+        return player
 
 if __name__ == "__main__":
 
-    hero = Character()
     enemy = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
                   stamina = ngStamina, strength = ngStrength,
                   intelligence = ngIntelligence, dexterity = ngDexterity,
