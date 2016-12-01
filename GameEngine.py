@@ -124,25 +124,25 @@ def create_player():
                 has the highest satisfaction for the player, but is also the
                 most complicated, due to the many choices required.'''
 
-       valid = False
-       while not valid:
+        valid = False
+        while not valid:
 
-           gStrength = randint(3,18) 
-           gDexterity = randint(3,18)
-           gConstitution = randint(3,18)
-           gIntelligence = randint(3,18)
-           gWisdom = randint(3,18)
-           gCharisma = randint(3,18)
-           if gStrength > 11 or gDexterity > 11 or gConstitution > 11 or \
-              gIntelligence > 11 or gWisdom > 11 or gCharisma > 11:
-               valid = True
-       gName = input("What is your character's name? ")
-       gPotionCount = 0
-       gWeapon = Weapon(name = "stick", base = 3, bonus = 0)
-       gArmor = Armor(name = "Loincloth", base = 0, bonus = 0)
-       gHealth = randint(1,8) 
+            gStrength = randint(3,18) 
+            gDexterity = randint(3,18)
+            gConstitution = randint(3,18)
+            gIntelligence = randint(3,18)
+            gWisdom = randint(3,18)
+            gCharisma = randint(3,18)
+            if gStrength > 11 or gDexterity > 11 or gConstitution > 11 or \
+               gIntelligence > 11 or gWisdom > 11 or gCharisma > 11:
+                valid = True
+        gName = input("What is your character's name? ")
+        gPotionCount = 0
+        gWeapon = Weapon(name = "stick", base = 3, bonus = 0)
+        gArmor = Armor(name = "Loincloth", base = 0, bonus = 0)
+        gHealth = randint(1,8) 
                   
-       return Character(name = gName, strength = gStrength,\
+        return Character(name = gName, strength = gStrength,\
                          dexterity = gDexterity, constitution = gConstitution,\
                          intelligence = gIntelligence, wisdom = gWisdom,\
                          charisma = gCharisma, numberOfPotions = gPotionCount,\
@@ -199,7 +199,8 @@ if __name__ == "__main__":
                   aggression = ngAggression, awareness = ngAwareness,
                   fear = ngFear)
 
-    hero = create_player()
+    #hero = create_player()
+    hero = Character()
 
     combat(hero, enemy)
 

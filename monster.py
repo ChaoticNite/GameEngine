@@ -196,17 +196,28 @@ class Raptor(Character):
         aggression = 92
         awareness = 60
         fear = 10
+        mercy = 20
         maxHealth = 60
         super(Raptor, self).__init__(rapName, maxHealth, speed, stamina,
                                        strength, dexterity, intelligence,
                                        numberOfPotions,
-                                       aggression, awareness, fear)
+                                       aggression, awareness, fear, mercy)
     def combat_choice(self):
         ''' Combat AI for Raptor
 
             They are able to be convinced that you aren't worth getting slaughtered.'''
-
-        
+    
+        if self.intelligence > 15 and aggression <= 90:
+            
+ 
+        if attackValue >= healValue and attackValue >= fleeValue:
+            return "a"
+        elif healValue >= attackValue and healValue >= fleeValue:
+            return "h"
+        elif fleeValue >= attackValue and fleeValue >= healValue:
+            return "f"
+        else:
+            return "AI_error"
 
 
                 
@@ -222,6 +233,7 @@ def random_monster():
     orc = Orc()
     moblin = Moblin()
     minotaur = Minotaur()
+    raptor = Raptor()
     
     
     listOfMonsters = [monster, orc, moblin]
