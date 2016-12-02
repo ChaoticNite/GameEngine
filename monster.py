@@ -207,17 +207,17 @@ class Raptor(Character):
 
             They are able to be convinced that you aren't worth getting slaughtered.'''
     
-        if self.intelligence > 15 and aggression <= 90:
+        #if self.intelligence > 15 and aggression <= 90:
             
  
-        if attackValue >= healValue and attackValue >= fleeValue:
-            return "a"
-        elif healValue >= attackValue and healValue >= fleeValue:
-            return "h"
-        elif fleeValue >= attackValue and fleeValue >= healValue:
-            return "f"
-        else:
-            return "AI_error"
+        #if attackValue >= healValue and attackValue >= fleeValue:
+        #    return "a"
+        #elif healValue >= attackValue and healValue >= fleeValue:
+         #   return "h"
+        #elif fleeValue >= attackValue and fleeValue >= healValue:
+         #   return "f"
+        #else:
+         #   return "AI_error"
 
 
                 

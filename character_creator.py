@@ -7,6 +7,8 @@
 import tkinter as tk
 from character import *
 from monster import *
+import random as rnd
+from GameEngine import create_player
 
 TITLE_FONT = ("ms serif", 18, "bold")
 HEADING_FONT = ("symbol", 14, "bold")
@@ -112,17 +114,42 @@ class Hardcore(tk.Frame):
         self.controller = controller
         label = tk.Label(self, text="Hardcore", font=TITLE_FONT)
         label.grid(row = 1, column = 2, columnspan = 2)
+        self.statBlock = [rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18)]
+        self.strVar = tk.StringVar()
+        self.strVar = self.statBlock[0]
         self.create_widgets()        
+
     def create_widgets(self):
-        hdSTR = tk.Text(self, width = 40, height = 6, wrap = 'word', font = TEXT_FONT)
-        hdSTR.insert(0.0, "Strength (STR)")
-        hdSTR.grid(column = 1, columnspan = 2)
-        hdDEX = tk.Text(self, width = 40, height = 6, wrap = 'word', font = TEXT_FONT)
-        hdDEX.insert(0.0, "Dexterity (DEX)")
-        hdDEX.grid(column = 1, columnspan = 2)
-        hdCON = tk.Text(self, width = 40, height = 6, wrap = 'word', font = TEXT_FONT)
-        hdCON.insert(0.0, "Constitution (CON)")
-        hdCON.grid(column = 1, columnspan = 2)
+        hdSTR = tk.Label(self, width = 40, height = 6, text = "Strength (STR)",
+                         font = TEXT_FONT, foreground = "red")
+        hdSTR.grid(row = 1, column = 0, columnspan = 2)
+        hdDEX = tk.Label(self, width = 40, height = 6, text = "Dexterity (DEX)",
+                         font = TEXT_FONT, foreground = "orange")
+        hdDEX.grid(row = 2, column = 0, columnspan = 2)
+        hdCON = tk.Label(self, width = 40, height = 6, text = "Constitution (CON)",
+                         font = TEXT_FONT, foreground = "yellow")
+        hdCON.grid(row = 3, column = 0, columnspan = 2)
+        hdINT = tk.Label(self, width = 40, height = 6, text = "Intelligence (INT)",
+                         font = TEXT_FONT, foreground = "green")
+        hdINT.grid(row = 4, column = 0, columnspan = 2)
+        hdWIS = tk.Label(self, width = 40, height = 6, text = "Wisdom (WIS)",
+                         font = TEXT_FONT, foreground = "blue")
+        hdWIS.grid(row = 5, column = 0, columnspan = 2)
+        hdCHA = tk.Label(self, width = 40, height = 6, text = "Charisma (CHA)",
+                         font = TEXT_FONT, foreground = "indigo")
+        hdCHA.grid(row = 6, column = 0, columnspan = 2)
+
+        hdStrNum = tk.Label(self, text = str(self.statBlock[0]), font = TEXT_FONT,
+                            foreground = "red")
+        hdStrNum.grid(row = 2, column = 1)
+        hdDexNum = tk.Label(self, text = str(self.statBlock[1]), font = TEXT_FONT,
+                            foreground = "orange")
+        hdDexNum.grid(row = 3, column = 1)
 
         
         backButton = tk.Button(self, text="Back to Menu",
@@ -146,11 +173,129 @@ class FourD6(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         label = tk.Label(self, text="4 d 6", font=TITLE_FONT)
-        label.grid(row = 1, column = 1, columnspan = 2)
+        label.grid(row = 0, column = 1, columnspan = 2)
+        self.statBlock = [rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18),
+                          rnd.randint(3,18)]
+        self.counter = 0
+        self.strVar = tk.StringVar()
+        self.strVar = self.statBlock[0]
+        self.create_widgets()
+                
+        
+    def create_widgets(self):
+        dSTR = tk.Label(self, width = 40, height = 6, text = "Strength (STR)",
+                         font = TEXT_FONT, foreground = "red")
+        dSTR.grid(row = 1, column = 0, columnspan = 2)
+        dDEX = tk.Label(self, width = 40, height = 6, text = "Dexterity (DEX)",
+                         font = TEXT_FONT, foreground = "orange")
+        dDEX.grid(row = 2, column = 0, columnspan = 2)
+        dCON = tk.Label(self, width = 40, height = 6, text = "Constitution (CON)",
+                         font = TEXT_FONT, foreground = "yellow")
+        dCON.grid(row = 3, column = 0, columnspan = 2)
+        dINT = tk.Label(self, width = 40, height = 6, text = "Intelligence (INT)",
+                         font = TEXT_FONT, foreground = "green")
+        dINT.grid(row = 4, column = 0, columnspan = 2)
+        dWIS = tk.Label(self, width = 40, height = 6, text = "Wisdom (WIS)",
+                         font = TEXT_FONT, foreground = "blue")
+        dWIS.grid(row = 5, column = 0, columnspan = 2)
+        dCHA = tk.Label(self, width = 40, height = 6, text = "Charisma (CHA)",
+                         font = TEXT_FONT, foreground = "indigo")
+        dCHA.grid(row = 6, column = 0, columnspan = 2)
+
+        dSBox = tk.Entry(self)
+        dSBox.grid(row = 1, column = 2)
+        dDBox = tk.Entry(self)
+        dDBox.grid(row = 2, column = 2)
+        dCONBox = tk.Entry(self)
+        dCONBox.grid(row = 3, column = 2)
+        dIBox = tk.Entry(self)
+        dIBox.grid(row = 4, column = 2)
+        dWBox = tk.Entry(self)
+        dWBox.grid(row = 5, column = 2)
+        dCBox = tk.Entry(self)
+        dCBox.grid(row = 6, column = 2)
+
+        opNum1 = tk.Button(self, text = str(self.statBlock[0]))
+        opNum2 = tk.Button(self, text = str(self.statBlock[1]))
+        opNum3 = tk.Button(self, text = str(self.statBlock[2]))
+        opNum4 = tk.Button(self, text = str(self.statBlock[3]))
+        opNum5 = tk.Button(self, text = str(self.statBlock[4]))
+        opNum6 = tk.Button(self, text = str(self.statBlock[5]))
+
+        #self.buttons_rule()        
+        #self.killme()
         button = tk.Button(self, text="Back to Menu",
-                           command=lambda: controller.show_frame("Menu"))
+                           command=lambda: self.controller.show_frame("Menu"))
         button.grid()
 
+    def buttons_rule():
+        valid = False
+        #while not valid:
+            #opNum1.configure(command = lambda statBlock[1]=statBlock[1]: 
+            
+        
+        
+    def killme(self):        
+        if self.counter == 0:
+            dSBox.configure(state = 'normal')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'disabled')
+            dCBox/configure(state = 'disabled')
+
+        elif self.counter == 1:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'normal')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'disabled')
+            dCBox.configure(state = 'disabled')
+    
+        elif self.counter == 2:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'normal')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'disabled')
+            dCBox.configure(state = 'disabled')
+    
+        elif self.counter == 3:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'normal')
+            dWBox.configure(state = 'disabled')
+            dCBox.configure(state = 'disabled')
+            
+        elif self.counter == 4:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'normal')
+            dCBox.configure(state = 'disabled')
+
+        elif self.counter == 5:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'disabled')
+            dCBox.configure(state = 'normal')
+
+        else:
+            dSBox.configure(state = 'disabled')
+            dDBox.configure(state = 'disabled')
+            dCONBox.configure(state = 'disabled')
+            dIBox.configure(state = 'disabled')
+            dWBox.configure(state = 'disabled')
+            dCBox.configure(state = 'disabled')
+             
 class Help(tk.Frame):
 
     def __init__(self,parent, controller):
