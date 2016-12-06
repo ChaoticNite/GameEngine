@@ -243,8 +243,14 @@ class Character(object):
             message = self.name + " tried to steal an item, but can't stealth."
         return success, message
 
-    #def spare_talk(self, enemy):
-        
+    def spare_talk(self, enemy):
+        ''' Talk your way out of a fight
+
+            Only works on a few monsters, others won't be persuaded to talk things
+            outs. '''
+
+        if enemy.name = "Raptor":
+            #spareOp = """ Select
 
     def combat_choice(self):
         ''' player's combat choices'''
@@ -255,6 +261,8 @@ class Character(object):
                      A)ttack
                      H)eal
                      F)lee
+                     S)pare
+                     
                    Your Choice [A/h/f]: """)
         return choice
 

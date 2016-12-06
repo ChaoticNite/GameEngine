@@ -90,7 +90,7 @@ class Orc(Monster):
 class Moblin(Character):
     
     ''' a greedy violent creature ''' 
-    def __init__(self, firstPart = " ", name = " da Moblin"):
+    def __init__(self, firstPart = " ", name = "Moblin"):
         moblinName = fristPart + name
         speed = 25
         stamina = 25
@@ -146,7 +146,7 @@ class Moblin(Character):
 class Minotaur(Character):
 
     ''' A Heavy Hitting type monster. '''
-    def __init__(self, firstPart = " ", name = " das Minotaur"):
+    def __init__(self, firstPart = " ", name = "Minotaur"):
         minoName = fristPart + name
         speed = 50
         stamina = 40
@@ -159,7 +159,7 @@ class Minotaur(Character):
         awareness = 60
         fear = 10
         maxHealth = 60
-        super(Minotaur, self).__init__(minoName, maxHealth, speed, stamina,
+        super(Minotaur, self).__init__(name, minoName, maxHealth, speed, stamina,
                                        strength, dexterity, intelligence,
                                        numberOfPotions,
                                        aggression, awareness, fear)
@@ -184,7 +184,7 @@ class Minotaur(Character):
 class Raptor(Character):
 
     ''' An intelligent creature that just happens to be a talking dinosaur.'''
-    def __init__(self, firstPart = " ", name = " le Raptor"):
+    def __init__(self, firstPart = " ", name = "Raptor"):
         rapName = firstPart + name
         speed = 42
         stamina = 30
@@ -198,26 +198,35 @@ class Raptor(Character):
         fear = 10
         mercy = 20
         maxHealth = 60
-        super(Raptor, self).__init__(rapName, maxHealth, speed, stamina,
+        spare = randint(1,3)
+        spRate = 0
+        super(Raptor, self).__init__(name, rapName, maxHealth, speed, stamina,
                                        strength, dexterity, intelligence,
-                                       numberOfPotions,
+                                       numberOfPotions, spare, spRate,
                                        aggression, awareness, fear, mercy)
     def combat_choice(self):
         ''' Combat AI for Raptor
 
             They are able to be convinced that you aren't worth getting slaughtered.'''
-    
-        #if self.intelligence > 15 and aggression <= 90:
+                
+        attackValue = randint(1,100) + self.aggression
+        healValue = randint(1,100) + self.awareness
+        fleeValue = randint(1,100) + self.fear
+        
+        if spRate < 2:
+            self.rapName
+            attackValue = attackValue/(spRate/2)
+            if attackValue >= healValue and attackValue >= fleeValue:
+                return "a"
+            elif healValue >= attackValue and healValue >= fleeValue:
+                return "h"
+            elif fleeValue >= attackValue and fleeValue >= healValue:
+                return "f"
+            else:
+                return "AI_error"
+        elif spRate = 5:
             
- 
-        #if attackValue >= healValue and attackValue >= fleeValue:
-        #    return "a"
-        #elif healValue >= attackValue and healValue >= fleeValue:
-         #   return "h"
-        #elif fleeValue >= attackValue and fleeValue >= healValue:
-         #   return "f"
-        #else:
-         #   return "AI_error"
+            
 
 
                 

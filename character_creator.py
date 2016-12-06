@@ -124,7 +124,7 @@ class Hardcore(tk.Frame):
         self.columnconfigure(2, weight=1)
         
         label = tk.Label(self, text="Hardcore", font=TITLE_FONT)
-        label.grid(row = 0, column = 1, columnspan = 2)
+        label.grid(row = 0, column = 1)
         self.roll_dice()
         self.strVar = tk.StringVar()
         self.strVar = self.statBlock[0]
@@ -210,7 +210,7 @@ class Hardcore(tk.Frame):
         #Charisma
         hdCHA = tk.Label(self, width = 40, height = 6, text = "Charisma",
                          foreground = "indigo")
-        self.chaLbl = tk.Label(self, text="(CHA)", foreground="violet",
+        self.chaLbl = tk.Label(self, text="(CHA)", foreground="indigo",
                                width=20)
         self.hdChaNum = tk.Label(self, text = str(self.statBlock[5]),
                             foreground = "indigo")
@@ -259,11 +259,175 @@ class Simple(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
         label = tk.Label(self, text="Simple", font=TITLE_FONT)
-        label.grid(row = 1, column = 2, columnspan = 2)
-        button = tk.Button(self, text="Back to Menu",
-                           command=lambda: controller.show_frame("Menu"))
-        button.grid()
+        label.grid(row = 0, column = 1)
+        self.buttonClicks = 0
+        self.create_widgets()
+
+    def create_widgets(self):
+        #Instructions
+        if self.buttonClicks == 0:
+            self.instructionLbl = tk.Label(self, text="Click a button to choose "+\
+                                           "Most Important Attribute.",
+                                           font = INSTRUCTION_FONT)
+        self.instructionLbl.grid(row=1, column=0, columnspan = 4)
+        
+        #Table Headings
+        self.attLbl = tk.Label(self, text = "Attribute")
+        self.abrLbl = tk.Label(self, text="Abbreviation")
+        self.scoreLbl = tk.Label(self, text="Score")
+        self.attLbl.grid(row=2, column=0)
+        self.abrLbl.grid(row=2, column=1)
+        self.scoreLbl.grid(row=2, column=2)
+
+        #Strength
+        self.sSTR = tk.Button(self, width = 20, height = 2, text = "Strength",
+                         foreground = "red", 
+                         command=lambda:
+                         self.bttnClick(1))
+        self.strLbl = tk.Label(self, text="(STR)", foreground="red",
+                               width=20)
+        self.sStrNum = tk.Label(self, text = "12", foreground = "red")
+        self.sSTR.grid(row = 3, column = 0)
+        self.strLbl.grid(row = 3, column=1)
+        self.sStrNum.grid(row = 3, column = 2)
+
+        #Dexterity
+        self.sDEX = tk.Button(self, width = 20, height = 2, text = "Dexterity",
+                         foreground = "orange", command=lambda:
+                         self.bttnClick(2))
+        self.dexLbl = tk.Label(self, text="(DEX)", foreground="orange",
+                               width=20)
+        self.sDexNum = tk.Label(self, text = "12",
+                                foreground = "orange")
+        self.sDexNum.grid(row = 4, column = 2)
+        self.dexLbl.grid(row = 4, column=1)
+        self.sDEX.grid(row = 4, column = 0)
+
+        #Constitution
+        self.sCON = tk.Button(self, width = 20, height = 2, text = "Constitution",
+                         foreground = "yellow", command=lambda:
+                         self.bttnClick(3))
+        self.conLbl = tk.Label(self, text="(CON)", foreground="yellow",
+                               width=20)
+        self.sConNum = tk.Label(self, text = "12",
+                                foreground = "yellow")
+        self.sCON.grid(row = 5, column = 0)
+        self.conLbl.grid(row = 5, column=1)
+        self.sConNum.grid(row = 5, column = 2)
+        #Intelligence        
+        self.sINT = tk.Button(self, width = 20, height = 2, text = "Intelligence",
+                         foreground = "green", command=lambda:
+                         self.bttnClick(4))
+        self.intLbl = tk.Label(self, text="(INT)", foreground="green",
+                               width=20)
+        self.sIntNum = tk.Label(self, text = "12",
+                                foreground = "green")
+        self.sINT.grid(row = 6, column = 0)
+        self.intLbl.grid(row = 6, column=1)
+        self.sIntNum.grid(row = 6, column = 2)
+        
+        #Wisdom
+        self.sWIS = tk.Button(self, width = 20, height = 2, text = "Wisdom",
+                         foreground = "blue", command=lambda:
+                         self.bttnClick(5))
+        self.wisLbl = tk.Label(self, text="(WIS)", foreground="blue",
+                               width=20)
+        self.sWisNum = tk.Label(self, text = "12",
+                                foreground = "blue")
+        self.sWIS.grid(row = 7, column = 0)
+        self.wisLbl.grid(row = 7, column=1)
+        self.sWisNum.grid(row = 7, column = 2)
+        
+        #Charisma
+        self.sCHA = tk.Button(self, width = 20, height = 2, text = "Charisma",
+                         foreground = "indigo", command=lambda:
+                         self.bttnClick(6))
+        self.chaLbl = tk.Label(self, text="(CHA)", foreground="indigo",
+                               width=20)
+        self.sChaNum = tk.Label(self, text = "12",
+                                foreground = "indigo")
+        self.sCHA.grid(row = 8, column = 0)
+        self.chaLbl.grid(row = 8, column=1)
+        self.sChaNum.grid(row = 8, column = 2)
+
+
+        #Bottom Row
+        self.resetBttn = tk.Button(self, text = "Reset", width = 20,
+                               command = lambda: self.reset())
+        self.resetBttn.grid()
+
+        self.backbutton = tk.Button(self, text="Back to Menu", width = 20,
+                           command = lambda: self.controller.show_frame("Menu"))
+        self.backbutton.grid(row = 9, column = 1)
+
+        self.saveBttn = tk.Button(self, text="Save and\nContinue", width = 20,
+                                  command = self.save_character, state = tk.DISABLED)
+        self.saveBttn.grid(row = 9, column = 2)
+        
+    def save_character(self):
+        self.controller.player.strength = int(self.sStrNum["text"])
+        self.controller.player.dexterity = int(self. sDexNum["text"])
+        self.controller.player.constitution = int(self.sConNum["text"])
+        self.controller.player.intelligence = int(self.sIntNum["text"])
+        self.controller.player.wisdom = int(self.sWisNum["text"])
+        self.controller.player.charisma = int(self.sChaNum["text"])
+        print(self.controller.player)
+        self.controller.show_frame("Menu")
+
+    def bttnClick(self, value):
+
+        self.labelList = (self.sStrNum, self.sDexNum, self.sConNum,
+                          self.sIntNum, self.sWisNum, self.sChaNum)
+        buttonList = (self.sSTR, self.sDEX, self.sCON,
+                      self.sINT, self.sWIS, self.sCHA)
+
+        if self.buttonClicks == 0:
+            self.labelList[value - 1].configure(text = "17")
+        elif self.buttonClicks == 1:
+            self.labelList[value - 1].configure(text = "9")
+        buttonList[value-1].configure(state = tk.DISABLED)
+        self.buttonClicks += 1
+        self.update_instructions()
+        if self.buttonClicks > 1:
+            self.saveBttn["state"] = tk.NORMAL
+            self.sSTR["state"] = tk.DISABLED
+            self.sDEX["state"] = tk.DISABLED
+            self.sCON["state"] = tk.DISABLED
+            self.sINT["state"] = tk.DISABLED
+            self.sWIS["state"] = tk.DISABLED
+            self.sCHA["state"] = tk.DISABLED
+
+
+    def update_instructions(self):
+        '''change instructions as user picks their more favored Stats'''
+        wordList = ("Most Important", "Least Important")
+        word = ""
+        if self.buttonClicks == 0:
+            word = wordList[self.buttonClicks]
+        elif self.buttonClicks == 1:
+            word = wordList[self.buttonClicks]
+        message = "Click a button to choose your " + word + " Attribute."
+        self.instructionLbl["text"] = message
+
+    def reset(self):
+        '''enable all buttons, set labels back to blank'''
+        self.buttonClicks = 0
+        self.update_instructions()
+        buttonList = (self.sSTR, self.sDEX, self.sCON,
+                      self.sINT, self.sWIS, self.sCHA)
+        for i in range(len(buttonList)):
+            buttonList[i].configure(state = tk.NORMAL)
+
+        self.sStrNum["text"] = "12"
+        self.sDexNum["text"] = "12"
+        self.sConNum["text"] = "12"
+        self.sIntNum["text"] = "12"
+        self.sWisNum["text"] = "12"
+        self.sChaNum["text"] = "12"
 
 class FourD6(tk.Frame):
 
@@ -271,6 +435,9 @@ class FourD6(tk.Frame):
         '''class constructor'''
         tk.Frame.__init__(self, parent)
         self.controller = controller
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
         self.buttonClicks = 0
         self.statBlock = []
         for i in range(6):
@@ -296,7 +463,7 @@ class FourD6(tk.Frame):
         self.label = tk.Label(self, text="4 d 6", font=TITLE_FONT)
         self.label.grid(row=0, column=0, columnspan=3)
 
-        #row 1 - table headings
+        #table headings
         self.attLbl = tk.Label(self, text="Attribute")
         self.abrLbl = tk.Label(self, text="Abbreviation")
         self.scoreLbl = tk.Label(self, text="Score")
@@ -304,7 +471,7 @@ class FourD6(tk.Frame):
         self.abrLbl.grid(row=1, column=1)
         self.scoreLbl.grid(row=1, column=2)
 
-        #row 2 - Strength
+        #Strength
         self.strengthLbl = tk.Label(self, text="Strength", foreground="red",
                                     width=20)
         self.strLbl = tk.Label(self, text="(STR)", foreground="red",
@@ -315,7 +482,7 @@ class FourD6(tk.Frame):
         self.strLbl.grid(row = 2, column=1)
         self.strStatLbl.grid(row = 2, column=2)
 
-        #row 3 - Dexterity
+        #Dexterity
         self.dexterityLbl = tk.Label(self, text="Dexterity", foreground="orange",
                                     width=20)
         self.dexLbl = tk.Label(self, text="(DEX)", foreground="orange",
@@ -326,7 +493,7 @@ class FourD6(tk.Frame):
         self.dexLbl.grid(row = 3, column=1)
         self.dexStatLbl.grid(row = 3, column=2)
 
-        #row 4 - Constitution
+        #Constitution
         self.constitutionLbl = tk.Label(self, text="Constitution",
                                         foreground="yellow", width=20)
         self.conLbl = tk.Label(self, text="(CON)", foreground="yellow",
@@ -337,7 +504,7 @@ class FourD6(tk.Frame):
         self.conLbl.grid(row = 4, column=1)
         self.conStatLbl.grid(row = 4, column=2)
 
-        #row 5 - Intelligence
+        #Intelligence
         self.intelligenceLbl = tk.Label(self, text="Intelligence",
                                         foreground="green", width=20)
         self.intLbl = tk.Label(self, text="(INT)", foreground="green",
@@ -348,7 +515,7 @@ class FourD6(tk.Frame):
         self.intLbl.grid(row = 5, column=1)
         self.intStatLbl.grid(row = 5, column=2)
 
-        #row 6 - Wisdom
+        #Wisdom
         self.wisdomLbl = tk.Label(self, text="Wisdom", foreground="blue",
                                   width=20)
         self.wisLbl = tk.Label(self, text="(WIS)", foreground="blue",
@@ -359,72 +526,66 @@ class FourD6(tk.Frame):
         self.wisLbl.grid(row = 6, column=1)
         self.wisStatLbl.grid(row = 6, column=2)
 
-        #row 7 - Charisma
-        self.charismaLbl = tk.Label(self, text="Charisma", foreground="violet",
+        #Charisma
+        self.charismaLbl = tk.Label(self, text="Charisma", foreground="indigo",
                                     width=20)
-        self.chaLbl = tk.Label(self, text="(CHA)", foreground="violet",
+        self.chaLbl = tk.Label(self, text="(CHA)", foreground="indigo",
                                width=20)
-        self.chaStatLbl = tk.Label(self, text="", foreground="violet",
+        self.chaStatLbl = tk.Label(self, text="", foreground="indigo",
                                    width=20)
         self.charismaLbl.grid(row = 7, column=0)
         self.chaLbl.grid(row = 7, column=1)
         self.chaStatLbl.grid(row = 7, column=2)
 
-        #row 8 - subheading "Available scores"
+        #subheading "Available scores"
         self.subHeadLbl = tk.Label(self, text="Available Scores",
                                    font = HEADING1_FONT)
         self.subHeadLbl.grid(row=8, column=0, columnspan=3)
 
-        #row 9 - Instructions
+        #Instructions
         self.instructionLbl = tk.Label(self, text="Click a button to choose "+\
                                        "your Strength score",
                                        font = INSTRUCTION_FONT)
         self.instructionLbl.grid(row=9, column=0, columnspan=3)
 
-        #row 10 - first row of score buttons
-        self.bttn1 = tk.Button(self, text = str(self.statBlock[0]),
-                               font=TABLE_FONT, width=20,
+        #First row of score buttons
+        self.bttn1 = tk.Button(self, text = str(self.statBlock[0]), width=20,
                                command=lambda:
                                self.bttnClick(1, str(self.statBlock[0])))
         self.bttn1.grid(row=10, column=0)
 
-        self.bttn2 = tk.Button(self, text = str(self.statBlock[1]),
-                               font=TABLE_FONT, width=20,
+        self.bttn2 = tk.Button(self, text = str(self.statBlock[1]), width=20,
                                command=lambda:
                                self.bttnClick(2, str(self.statBlock[1])))
         self.bttn2.grid(row=10, column=1)
 
-        self.bttn3 = tk.Button(self, text = str(self.statBlock[2]),
-                               font=TABLE_FONT, width=20,
+        self.bttn3 = tk.Button(self, text = str(self.statBlock[2]), width=20,
                                command=lambda:
                                self.bttnClick(3, str(self.statBlock[2])))
         self.bttn3.grid(row=10, column=2)
 
-        #row 11 - second row of score buttons
-        self.bttn4 = tk.Button(self, text = str(self.statBlock[3]),
-                               font=TABLE_FONT, width=20,
+        #Second row of score buttons
+        self.bttn4 = tk.Button(self, text = str(self.statBlock[3]), width=20,
                                command=lambda:
                                self.bttnClick(4, str(self.statBlock[3])))
         self.bttn4.grid(row=11, column=0)
 
-        self.bttn5 = tk.Button(self, text = str(self.statBlock[4]),
-                               font=TABLE_FONT, width=20,
+        self.bttn5 = tk.Button(self, text = str(self.statBlock[4]), width=20,
                                command=lambda:
                                self.bttnClick(5, str(self.statBlock[4])))
         self.bttn5.grid(row=11, column=1)
                                
-        self.bttn6 = tk.Button(self, text = str(self.statBlock[5]),
-                               font=TABLE_FONT, width=20,
+        self.bttn6 = tk.Button(self, text = str(self.statBlock[5]), width=20,
                                command=lambda:
                                self.bttnClick(6, str(self.statBlock[5])))
         self.bttn6.grid(row=11, column=2)
 
-        #row 12 - reset button
+        #Reset button
         self.resetBttn = tk.Button(self, text = "Reset", width=20,
                                command = self.reset)
         self.resetBttn.grid(row=12, column=1)
         
-        #row 13 - Navigation Buttons
+        #Navigation Buttons
         self.rrBttn = tk.Button(self, text = "Reroll", width=20,
                                command = self.re_roll)
         self.rrBttn.grid()
@@ -499,44 +660,47 @@ class FourD6(tk.Frame):
              
 class Help(tk.Frame):
 
-    def __init__(self,parent, controller):
+    def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        self.create_widgets()
-    def create_widgets(self):     
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
         label = tk.Label(self, text="Method Description", font=TITLE_FONT)
-        label.grid()
-
+        label.grid(row = 0, column = 0, columnspan = 3)
+        self.create_widgets()
+        
+    def create_widgets(self):     
         simpleLbl = tk.Label(self, text = "Simple", font=HEADING1_FONT)
-        simpleLbl.grid()
+        simpleLbl.grid(row = 1, column = 1)
         simpleTxt = tk.Text(self, width = 40, height = 6, wrap = 'word')
         simpleTxt.insert(0.0, SIMPLE_MESSAGE)
-        simpleTxt.grid()
+        simpleTxt.grid(row = 2, column = 0, columnspan = 3)
         simpleTxt.configure(state="disabled")
 
         hardLbl = tk.Label(self, text = "Hardcore", font=HEADING1_FONT)
-        hardLbl.grid()
+        hardLbl.grid(row = 3, column = 1)
         hardcoreTxt = tk.Text(self, width = 40, height = 6, wrap = 'word')
         hardcoreTxt.insert(0.0, HARDCORE_MESSAGE)
-        hardcoreTxt.grid()
+        hardcoreTxt.grid(row = 4, column = 0, columnspan = 3)
         hardcoreTxt.configure(state="disabled")
 
         fourDLbl = tk.Label(self, text = "Four D6", font=HEADING1_FONT)
-        fourDLbl.grid()
+        fourDLbl.grid(row = 5, column = 1)
         fourDTxt = tk.Text(self, width = 40, height = 6, wrap = 'word')
         fourDTxt.insert(0.0, FOURD6_MESSAGE)
-        fourDTxt.grid()
+        fourDTxt.grid(row = 6, column = 0, columnspan = 3)
         fourDTxt.configure(state="disabled")
         
         button = tk.Button(self, text="Back to Menu",
                            command=lambda: self.controller.show_frame("Menu"))
-        button.grid()
+        button.grid(column = 1)
 
 
 
 # main
 root = RootApp()
 root.title("Character Creator")
-root.geometry("400x400")
+root.geometry("800x800")
 
 root.mainloop()

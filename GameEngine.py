@@ -25,6 +25,9 @@ def combat(one, two):
         elif choice == "h":
             success, message = current.heal() #This has no effect on the loop
             
+        elif choice == "s":
+            success, message = current.spare()
+                        
         else:
             success, message = current.attack(target)
             if target.health <= 0:  #combat ends if the enemy dies
