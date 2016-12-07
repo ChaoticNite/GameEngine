@@ -48,7 +48,8 @@ class Character(object):
                  inventory = [],
                  weapon = "",
                  armor = "",
-                 imageFileName = "Roy.gif"):
+                 imageFileName = "Roy.gif",
+                 spRate = 0):
         ''' All values represent the average score '''
         self.name = name
         self.maxHealth = maxHealth
@@ -205,9 +206,11 @@ class Character(object):
             message = self.name + "fumbles their attack!"
 
 
-        attack = randint(1,20) + self.strBonus + self.weapon.attack
+        attack = randint(1,20) + self.strBonus
+        #+ self.weapon.attack
         if attack >= enemy.AC:
-            damage = self.weapon.damage + self.strBonus
+            damage = self.strBonus
+            #self.weapon.damage + self.strBonus
             if damage < 1:
                 damage = 1
             enemy.health -= damage
@@ -216,9 +219,11 @@ class Character(object):
                       str(damage) + " damage."
 
         else:
-            attack = roll + self.strBonus + self.weapon.attack
+            attack = roll + self.strBonus
+            #+ self.weapon.attack
             if attack >= enemy.AC:
-                damage = self.weapon.damage + self.strBonus
+                damage = self.strBonus
+                #self.weapon.damage + self.strBonus
                 if damage < 1:
                     damage = 1
                 enemy.get_damaged(damage)
@@ -256,6 +261,8 @@ class Character(object):
             outs. '''
         success = False        
         message = enemy.name + "refuses to listen!"
+        spareLvl = 1
+        spareOp = 0
         if spareLvl == 1 and enemy.intelligence >= 8:
             if enemy.name == "Raptor":
                 spareOp = input("""  Select what to say:
@@ -278,13 +285,13 @@ class Character(object):
                                 3) Knock it off!
 
                               Your Choice [(1)/2/3]: """)
-            if spareOp == enemy.spare:
-                message = enemy.name + "seems more reluctant."
-                success = True
-                enemy.spRate += 1
+        if spareOp == enemy.spare:
+            message = enemy.name + "seems more reluctant."
+            success = True
+            enemy.spRate += 1
                 
-            else:
-                enemy.spRate -= 1
+        else:
+            enemy.spRate -= 1
 
     def response(self, enemy):
         ''' Enemy's response
@@ -308,7 +315,7 @@ class Character(object):
                      F)lee
                      S)pare
                      
-                   Your Choice [A/h/f]: """)
+                   Your Choice [A/h/f/s]: """)
         return choice
 
     def __str__(self):

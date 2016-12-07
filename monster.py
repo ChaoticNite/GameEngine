@@ -38,11 +38,13 @@ class Monster(Character):
                  aggression = 50,
                  awareness = 50,
                  fear = 50,
-                 imageFileName = "Blob.gif"):
+                 imageFileName = "Blob.gif",
+                 spRate = 0):
         super(Monster, self).__init__(name, maxHealth, speed, stamina,
                                       strength, dexterity, constitution,
                                       intelligence, wisdom, charisma,
-                                      numberOfPotions, inventory, imageFileName)
+                                      numberOfPotions, inventory, imageFileName,
+                                      spRate)
         self.aggression = aggression
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
@@ -111,10 +113,11 @@ class Moblin(Character):
         fear = 20
         risk = 20
         maxHealth = 100
+        spRate = 0
         super(Moblin, self).__init__(moblinName, maxHealth, speed, stamina,
                                      strength, dexterity, intelligence,
                                      numberOfPotions,
-                                     aggression, awareness, fear, risk)
+                                     aggression, awareness, fear, risk, spRate)
 
     def combat_choice(self):
         ''' combat AI
@@ -166,10 +169,11 @@ class Minotaur(Character):
         awareness = 60
         fear = 10
         maxHealth = 60
+        spRate = 0
         super(Minotaur, self).__init__(name, minoName, maxHealth, speed, stamina,
                                        strength, dexterity, intelligence,
                                        numberOfPotions,
-                                       aggression, awareness, fear)
+                                       aggression, awareness, fear, spRate)
 
     def combat_choice(self):
         ''' Combat AI for Minotaur

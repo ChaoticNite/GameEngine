@@ -27,13 +27,10 @@ def combat(one, two):
             success, message = current.heal() #This has no effect on the loop
             
         elif choice == "s":
-            success, message = current.spare()
+            success, message = current.spare(target)
             
         elif choice == "t":
             success, message = current.take()
-
-        elif choice == "d":
-            success, message = current.spare()
 
         elif choice == "response":
             success, message = current.respone()
@@ -205,12 +202,7 @@ def create_player():
 
 if __name__ == "__main__":
 
-    enemy = Monster(name = ngName, maxHealth = ngMXHealth, speed = ngSpeed,
-                  stamina = ngStamina, strength = ngStrength,
-                  intelligence = ngIntelligence, dexterity = ngDexterity,
-                  numberOfPotions = ngNumberOfPotions, inventory = ngInventory,
-                  aggression = ngAggression, awareness = ngAwareness,
-                  fear = ngFear)
+    enemy = Monster()
 
     #hero = create_player()
     hero = Character()
