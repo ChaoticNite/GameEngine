@@ -6,7 +6,13 @@
 ''' CHANGELOG: (11/30/16)
     Adding pieces from the NameGene as individually classes so the generator
     uses several different types of outcomes, will involve a sparing option
-    depending on attitude and monster.'''
+    depending on attitude and monster.
+    12/06/2016
+    NOTE: Got to remember to update CHANGELOGs more often.
+    Transferring creatures over from NameGene.py to be more compatible with any
+    future updates to the rest of the code. Added the ability for some creatures
+    to steal (take) healing potions from the player. Spare function is being added
+    to certain creatures based Intelligence.'''
 
 
 ''' Monster Package '''

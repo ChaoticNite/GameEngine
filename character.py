@@ -1,5 +1,6 @@
 # character.py
 # Thorin Schmidt
+# Edited by Noel Kling
 # 11/16/2016
 
 ''' Module that contains our game's Character base class
@@ -21,6 +22,9 @@
     added constitution, wisdom, and charisma attributes. modified attack
     to do a minimum of 1 damage, as well as added the possibility of a
     critical fumble (roll of 1).
+    12/06/2016
+    created a Take option for the enemies to steal hero's potions.
+    Spare option being built to talk a way out of fights.
 
 '''
 from namegene import *
@@ -248,9 +252,32 @@ class Character(object):
 
             Only works on a few monsters, others won't be persuaded to talk things
             outs. '''
+        message = enemy.name + "refuses to listen!"
+        if spareLvl == 1 and enemy.intelligence >= 8:
+            if enemy.name == "Raptor":
+                spareOp = input("""  Select what to say:
+                                1) Hear me out!
+                                2) Wait! Let's be civil!
+                                3) I wish not to fight you.
 
-        if enemy.name = "Raptor":
-            #spareOp = """ Select
+                              Your Choice [(1)/2/3]: """)
+            elif enemy.name == "Wolysion":
+                spareOp = input("""  Select what to say:
+                                1) Stop!
+                                2) You seem to be a calm one.
+                                3) I would rather not have to fight.
+
+                              Your Choice [(1)/2/3]: """)
+            elif enemy.name == "Tarawin":
+                spareOp = input("""  Select what to say:
+                                1) Please stop!
+                                2) Will you listen to what I have to say?!
+                                3) Knock it off!
+
+                              Your Choice [(1)/2/3]: """)
+            if spareOp == enemy.spare:
+                
+                            
 
     def combat_choice(self):
         ''' player's combat choices'''
