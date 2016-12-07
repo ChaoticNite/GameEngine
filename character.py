@@ -47,7 +47,8 @@ class Character(object):
                  numberOfPotions = 2,
                  inventory = [],
                  weapon = "",
-                 armor = ""):
+                 armor = "",
+                 imageFileName = "Roy.gif"):
         ''' All values represent the average score '''
         self.name = name
         self.maxHealth = maxHealth
@@ -61,6 +62,7 @@ class Character(object):
         self.intelligence = intelligence
         self.wisdom = wisdom
         self.charisma = charisma
+        self.imageFileName = imageFileName
         self.inventory = []
         for item in inventory:
             self.inventory.append(item[:])
@@ -247,11 +249,12 @@ class Character(object):
             message = self.name + " tried to steal an item, but can't stealth."
         return success, message
 
-    def spare_talk(self, enemy):
+    def spare(self, enemy):
         ''' Talk your way out of a fight
 
             Only works on a few monsters, others won't be persuaded to talk things
             outs. '''
+        success = False        
         message = enemy.name + "refuses to listen!"
         if spareLvl == 1 and enemy.intelligence >= 8:
             if enemy.name == "Raptor":
@@ -276,6 +279,21 @@ class Character(object):
 
                               Your Choice [(1)/2/3]: """)
             if spareOp == enemy.spare:
+                message = enemy.name + "seems more reluctant."
+                success = True
+                enemy.spRate += 1
+                
+            else:
+                enemy.spRate -= 1
+
+    def response(self, enemy):
+        ''' Enemy's response
+ 
+            How the enemy will response back to what has been said if successful'''
+                 
+        if enemy.spRate == 2:
+            if spareOp == 1:
+                message = "How the disperate plead?"
                 
                             
 
@@ -318,6 +336,7 @@ if __name__ == "__main__":
     print(hero.attack(orc))
     print(hero)
     print(orc)
+    
 
     
 

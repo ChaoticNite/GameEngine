@@ -1,5 +1,6 @@
 # GameEngine.py
 # Thorin Schmidt
+# Edited by Noel Kling
 # 11/15/2016
 
 '''module that contains classes and functions to run a game'''
@@ -27,7 +28,16 @@ def combat(one, two):
             
         elif choice == "s":
             success, message = current.spare()
-                        
+            
+        elif choice == "t":
+            success, message = current.take()
+
+        elif choice == "d":
+            success, message = current.spare()
+
+        elif choice == "response":
+            success, message = current.respone()
+            
         else:
             success, message = current.attack(target)
             if target.health <= 0:  #combat ends if the enemy dies

@@ -8,7 +8,6 @@ import tkinter as tk
 import character as ch
 from monster import *
 import random as rd
-from GameEngine import create_player
 
 TITLE_FONT = ("Helvetica", 20, "bold")
 HEADING1_FONT = ("Helvetica", 16, "bold")

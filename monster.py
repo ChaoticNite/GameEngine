@@ -37,11 +37,12 @@ class Monster(Character):
                  inventory = [],
                  aggression = 50,
                  awareness = 50,
-                 fear = 50):
+                 fear = 50,
+                 imageFileName = "Blob.gif"):
         super(Monster, self).__init__(name, maxHealth, speed, stamina,
                                       strength, dexterity, constitution,
                                       intelligence, wisdom, charisma,
-                                      numberOfPotions, inventory)
+                                      numberOfPotions, inventory, imageFileName)
         self.aggression = aggression
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
@@ -210,27 +211,29 @@ class Raptor(Character):
                                        strength, dexterity, intelligence,
                                        numberOfPotions, spare, spRate,
                                        aggression, awareness, fear, mercy)
-    def combat_choice(self):
-        ''' Combat AI for Raptor
+#    def combat_choice(self):
+#        ''' Combat AI for Raptor
 
-            They are able to be convinced that you aren't worth getting slaughtered.'''
-                
-        attackValue = randint(1,100) + self.aggression
-        healValue = randint(1,100) + self.awareness
-        fleeValue = randint(1,100) + self.fear
-        
-        if spRate < 2:
-            self.rapName
-            attackValue = attackValue/(spRate/2)
-            if attackValue >= healValue and attackValue >= fleeValue:
-                return "a"
-            elif healValue >= attackValue and healValue >= fleeValue:
-                return "h"
-            elif fleeValue >= attackValue and fleeValue >= healValue:
-                return "f"
-            else:
-                return "AI_error"
-        elif spRate = 5:
+#            They are able to be convinced that you aren't worth getting slaughtered.'''
+#                
+#        attackValue = randint(1,100) + self.aggression
+#        healValue = randint(1,100) + self.awareness
+#        fleeValue = randint(1,100) + self.fear
+#        
+#       if spRate < 2:
+#            attackValue = attackValue/(spRate/2)
+#                return "a"
+#            elif healValue >= attackValue and healValue >= fleeValue:
+#                return "h"
+#            elif fleeValue >= attackValue and fleeValue >= healValue:
+#                return "f"
+#            else:
+#                return "AI_error"
+#        elif spRate >= 3:
+#            
+            
+#        elif spRate = 5:
+            
             
             
 
