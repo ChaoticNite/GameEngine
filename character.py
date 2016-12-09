@@ -206,11 +206,9 @@ class Character(object):
             message = self.name + "fumbles their attack!"
 
 
-        attack = randint(1,20) + self.strBonus
-        #+ self.weapon.attack
+        attack = randint(1,20) + self.strBonus + weapon.attack
         if attack >= enemy.AC:
-            damage = self.strBonus
-            #self.weapon.damage + self.strBonus
+            damage = weapon.damage + self.strBonus
             if damage < 1:
                 damage = 1
             enemy.health -= damage
@@ -219,11 +217,9 @@ class Character(object):
                       str(damage) + " damage."
 
         else:
-            attack = roll + self.strBonus
-            #+ self.weapon.attack
+            attack = roll + self.strBonus + self.weapon.attack
             if attack >= enemy.AC:
-                damage = self.strBonus
-                #self.weapon.damage + self.strBonus
+                damage = weapon.damage + self.strBonus
                 if damage < 1:
                     damage = 1
                 enemy.get_damaged(damage)
@@ -289,6 +285,7 @@ class Character(object):
             message = enemy.name + "seems more reluctant."
             success = True
             enemy.spRate += 1
+            spareLvl += 1
                 
         else:
             enemy.spRate -= 1
@@ -297,7 +294,7 @@ class Character(object):
         ''' Enemy's response
  
             How the enemy will response back to what has been said if successful'''
-                 
+        
         if enemy.spRate == 2:
             if spareOp == 1:
                 message = "How the disperate plead?"
