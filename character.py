@@ -64,6 +64,7 @@ class Character(object):
         self.wisdom = wisdom
         self.charisma = charisma
         self.imageFileName = imageFileName
+        self.spRate = spRate
         self.inventory = []
         for item in inventory:
             self.inventory.append(item[:])
@@ -206,9 +207,9 @@ class Character(object):
             message = self.name + "fumbles their attack!"
 
 
-        attack = randint(1,20) + self.strBonus + weapon.attack
+        attack = randint(1,20) + self.strBonus + self.weapon.attack
         if attack >= enemy.AC:
-            damage = weapon.damage + self.strBonus
+            damage = self.weapon.damage + self.strBonus
             if damage < 1:
                 damage = 1
             enemy.health -= damage
@@ -219,7 +220,7 @@ class Character(object):
         else:
             attack = roll + self.strBonus + self.weapon.attack
             if attack >= enemy.AC:
-                damage = weapon.damage + self.strBonus
+                damage = self.weapon.damage + self.strBonus
                 if damage < 1:
                     damage = 1
                 enemy.get_damaged(damage)

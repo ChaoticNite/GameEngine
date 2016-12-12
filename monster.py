@@ -92,10 +92,11 @@ class Orc(Monster):
         aggression = 80
         awareness = 30
         fear = 20
+        spRate = 0
         super(Orc, self).__init__(orcName, maxHealth, speed, stamina, strength,
                                   dexterity, constitution, intelligence,
                                   wisdom, charisma, numberOfPotions,
-                                  inventory, aggression, awareness, fear)
+                                  inventory, aggression, awareness, fear, spRate)
 class Moblin(Character):
     
     ''' a greedy violent creature ''' 
@@ -265,6 +266,7 @@ def random_monster():
 if __name__ == "__main__":
 
     grr = Orc()
+    print(grr.name, grr.spRate)
     
     #Randy = random_monster(firstPart = ngName, aggression )
     #print(Randy.name)
