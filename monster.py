@@ -19,6 +19,7 @@
 from namegene import *
 from character import *
 from random import randint, choice
+from GameEngine import isOver
 
 class Monster(Character):
     ''' generic monster class '''
@@ -39,12 +40,14 @@ class Monster(Character):
                  awareness = 50,
                  fear = 50,
                  imageFileName = "Blob.gif",
-                 spRate = 0):
+                 spRate = 0,
+                 spare = randint(1,3),
+                 weapon = ""):
         super(Monster, self).__init__(name, maxHealth, speed, stamina,
                                       strength, dexterity, constitution,
                                       intelligence, wisdom, charisma,
                                       numberOfPotions, inventory, imageFileName,
-                                      spRate)
+                                      spRate, spare, weapon)
         self.aggression = aggression
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
@@ -59,19 +62,26 @@ class Monster(Character):
             '''
                
         
-        attackValue = randint(1,100) + self.aggression
-        healValue = randint(1,100) + self.awareness
-        fleeValue = randint(1,100) + self.fear
-
-        if attackValue >= healValue and attackValue >= fleeValue:
-            return "a"
-        elif healValue >= attackValue and healValue >= fleeValue:
-            return "h"
-        elif fleeValue >= attackValue and fleeValue >= healValue:
-            return "f"
-        else:
-            return "AI_error"
-
+         attackValue = randint(1,100) + self.aggression
+         healValue = randint(1,100) + self.awareness
+         fleeValue = randint(1,100) + self.fear
+         
+        if spRate <= 2:
+             attackValue = attackValue/(spRate/2)
+                 return "a"
+             elif healValue >= attackValue and healValue >= fleeValue:
+                 return "h"
+             elif fleeValue >= attackValue and fleeValue >= healValue:
+                 return "f"
+             else:
+                 return "AI_error"
+         elif spRate >= 3:
+             return "respone"
+            
+         elif spRate = 5:
+             return "response"
+            
+        
 class Orc(Monster):
     ''' generic Orc class
 
@@ -96,7 +106,8 @@ class Orc(Monster):
         super(Orc, self).__init__(orcName, maxHealth, speed, stamina, strength,
                                   dexterity, constitution, intelligence,
                                   wisdom, charisma, numberOfPotions,
-                                  inventory, aggression, awareness, fear, spRate)
+                                  inventory, aggression, awareness,
+                                  fear, spRate)
 class Moblin(Character):
     
     ''' a greedy violent creature ''' 
@@ -193,7 +204,7 @@ class Minotaur(Character):
         else:
             return "AI_error"
 
-class Raptor(Character):
+class Raptor(Monster):
 
     ''' An intelligent creature that just happens to be a talking dinosaur.'''
     def __init__(self, firstPart = " ", name = "Raptor"):
@@ -210,37 +221,12 @@ class Raptor(Character):
         fear = 10
         mercy = 20
         maxHealth = 60
-        spare = randint(1,3)
         spRate = 0
         super(Raptor, self).__init__(name, rapName, maxHealth, speed, stamina,
                                        strength, dexterity, intelligence,
-                                       numberOfPotions, spare, spRate,
+                                       numberOfPotions, spRate,
                                        aggression, awareness, fear, mercy)
-#    def combat_choice(self):
-#        ''' Combat AI for Raptor
 
-#            They are able to be convinced that you aren't worth getting slaughtered.'''
-#                
-#        attackValue = randint(1,100) + self.aggression
-#        healValue = randint(1,100) + self.awareness
-#        fleeValue = randint(1,100) + self.fear
-#        
-#       if spRate < 2:
-#            attackValue = attackValue/(spRate/2)
-#                return "a"
-#            elif healValue >= attackValue and healValue >= fleeValue:
-#                return "h"
-#            elif fleeValue >= attackValue and fleeValue >= healValue:
-#                return "f"
-#            else:
-#                return "AI_error"
-#        elif spRate >= 3:
-#            
-            
-#        elif spRate = 5:
-            
-            
-            
 
 
                 

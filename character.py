@@ -74,11 +74,11 @@ class Character(object):
         if weapon == "":
             self.weapon = Weapon()
         else:
-            self.weapon = weapon
+            self.weapon = Weapon()
         if armor == "":
             self.armor = Armor()
         else:
-            self.armor = armor
+            self.armor = Armor()
 
     @property
     def strBonus(self):
@@ -259,52 +259,49 @@ class Character(object):
         success = False        
         message = enemy.name + "refuses to listen!"
         spareLvl = 1
-        spareOp = 0
+        spareOp = 1
         if spareLvl == 1 and enemy.intelligence >= 8:
-            if enemy.name == "Raptor":
-                spareOp = input("""  Select what to say:
-                                1) Hear me out!
-                                2) Wait! Let's be civil!
-                                3) I wish not to fight you.
+            if enemy.aggression <= 75:
+                spareOp = input("""Select what to say:
+                     1) Hear me out!
+                     2) Wait! Let's be civil!
+                     3) I wish not to fight you.
 
-                              Your Choice [(1)/2/3]: """)
-            elif enemy.name == "Wolysion":
-                spareOp = input("""  Select what to say:
-                                1) Stop!
-                                2) You seem to be a calm one.
-                                3) I would rather not have to fight.
+                   Your Choice [(1)/2/3]: """)
 
-                              Your Choice [(1)/2/3]: """)
-            elif enemy.name == "Tarawin":
-                spareOp = input("""  Select what to say:
-                                1) Please stop!
-                                2) Will you listen to what I have to say?!
-                                3) Knock it off!
-
-                              Your Choice [(1)/2/3]: """)
         if spareOp == enemy.spare:
             message = enemy.name + "seems more reluctant."
             success = True
             enemy.spRate += 1
+            enemy.aggression -= 10
             spareLvl += 1
                 
         else:
             enemy.spRate -= 1
+
+        return success, message
 
     def response(self, enemy):
         ''' Enemy's response
  
             How the enemy will response back to what has been said if successful'''
         
-        if enemy.spRate == 2:
+        if enemy.spRate >= 3:
             if spareOp == 1:
-                message = "How the disperate plead?"
-                
+                message = "How the disperate plead."
+
+            if spareOp == 2:
+                message = "Says the fool."
+
+            if spareOp == 3:
+                message = "Then why the challenge?"
+            
                             
 
-    def combat_choice(self):
+    def combat_choice(self, enemy):
         ''' player's combat choices'''
-        choice = input("""
+        if enemy.spRate <= 2:
+            choice = input("""
                   YOU ARE IN COMBAT!
                   What do you want to do?
                   You can:
@@ -314,6 +311,17 @@ class Character(object):
                      S)pare
                      
                    Your Choice [A/h/f/s]: """)
+        if enemy.spRate >= 3:
+            choice = input("""
+                  YOU ARE IN COMBAT!
+                  What do you want to do?
+                  You can:
+                     A)ttack
+                     H)eal
+                     F)lee
+                     R)eason
+                     
+                   Your Choice [A/h/f/r]: """)            
         return choice
 
     def __str__(self):
