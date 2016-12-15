@@ -86,7 +86,9 @@ class Orc(Monster):
     ''' generic Orc class
 
         this class '''
-    def __init__(self, name = "Dorque da Orc"):
+    def __init__(self, AGRBonus = ngAggression,
+                 AWRBonus = ngAwareness, FRBonus = ngFear,
+                 name = "Dorque da Orc"):
         orcName = name
         maxHealth = randint(1,8)
         speed = 25
@@ -99,9 +101,9 @@ class Orc(Monster):
         charisma = 10
         numberOfPotions = 2
         inventory = []
-        aggression = 80
-        awareness = 30
-        fear = 20
+        aggression = 80 + AGRBonus
+        awareness = 30 + AWRBonus
+        fear = 20 + FRBonus
         spRate = 0
         super(Orc, self).__init__(orcName, maxHealth, speed, stamina, strength,
                                   dexterity, constitution, intelligence,
@@ -111,7 +113,8 @@ class Orc(Monster):
 class Moblin(Character):
     
     ''' a greedy violent creature ''' 
-    def __init__(self, firstPart = " ", name = "Moblin"):
+    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
+                 AWRBonus = ngAwareness, FRBonus = ngFear, name = "Moblin"):
         moblinName = fristPart + name
         speed = 25
         stamina = 25
@@ -168,7 +171,8 @@ class Moblin(Character):
 class Minotaur(Character):
 
     ''' A Heavy Hitting type monster. '''
-    def __init__(self, firstPart = " ", name = "Minotaur"):
+    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
+                 AWRBonus = ngAwareness, FRBonus = ngFear, name = "Minotaur"):
         minoName = fristPart + name
         speed = 50
         stamina = 40
@@ -207,7 +211,9 @@ class Minotaur(Character):
 class Raptor(Monster):
 
     ''' An intelligent creature that just happens to be a talking dinosaur.'''
-    def __init__(self, firstPart = " ", name = "Raptor"):
+    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
+                 AWRBonus = ngAwareness, FRBonus = ngFear,
+                 name = "Raptor"):
         rapName = firstPart + name
         speed = 42
         stamina = 30
