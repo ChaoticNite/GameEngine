@@ -222,9 +222,9 @@ class Raptor(Monster):
         dexterity = 5
         numberOfPotions = 0
         inventory = []
-        aggression = 92
-        awareness = 60
-        fear = 10
+        aggression = 92 + AGRBonus
+        awareness = 60 + AWRBonus
+        fear = 10 + FRBonus
         mercy = 20
         maxHealth = 60
         spRate = 0
@@ -260,5 +260,6 @@ if __name__ == "__main__":
     grr = Orc()
     print(grr.name, grr.spRate)
     
-    #Randy = random_monster(firstPart = ngName, aggression )
+    Randy = random_monster(firstPart = ngName, ngAggression, ngFear,
+                           ngAwareness)
     #print(Randy.name)
