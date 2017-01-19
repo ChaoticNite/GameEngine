@@ -66,7 +66,7 @@ class Character(object):
         self.imageFileName = imageFileName
         self.spRate = spRate
         self.inventory = []
-        for item in inventory:
+        for item in range(inventory):
             self.inventory.append(item[:])
         self.potions = []
         for i in range(numberOfPotions):

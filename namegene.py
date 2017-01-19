@@ -8,99 +8,16 @@ from random import randint
 
 adjectName = ["Kind", "Average", "Lazy", "Noble", "Aggressive", "Boss",
              "Zesty", "Unbeatable"]
-nameSpecies = ["Moblin", "Minotaur", "Raptor", "Kobold", "Wolysion", "Tarawin"]
-
 namePart1 = random.randint(1, 8)
-namePart2 = random.randint(1, 6)
-
-if namePart2 == 1:
-    name2 = nameSpecies[0]
-    ngSpeed = 25
-    ngStamina = 25
-    ngStrength = 8
-    ngIntelligence = 8
-    ngDexterity = 8
-    ngNumberOfPotions = 2
-    ngInventory = []
-    ngAggression = 80
-    ngAwareness = 30
-    ngFear = 20
-    ngMXHealth = 100
+ngAggression = 0
+ngSpeed = 0
+ngAwareness = 0
+ngFear = 0
+ngIntelligence = 0
        
-elif namePart2 == 2:
-    name2 = nameSpecies[1]
-    ngSpeed = 50
-    ngStamina = 40
-    ngStrength = 15
-    ngIntelligence = 2
-    ngDexterity = 9
-    ngNumberOfPotions = 1
-    ngInventory = []
-    ngAggression = 95
-    ngAwareness = 15
-    ngFear = 5
-    ngMXHealth = 150
-        
-elif namePart2 == 3:
-    name2 = nameSpecies[2]
-    ngSpeed = 42
-    ngStamina = 30
-    ngStrength = 8
-    ngIntelligence = 12
-    ngDexterity = 5
-    ngNumberOfPotions = 0
-    ngInventory = []
-    ngAggression = 92
-    ngAwareness = 60
-    ngFear = 10
-    ngMXHealth = 60
-        
-elif namePart2 == 4:
-    name2 = nameSpecies[3]
-    ngSpeed = 4
-    ngStamina = 6
-    ngStrength = 2
-    ngIntelligence = 4
-    ngDexterity = 3
-    ngNumberOfPotions = 4
-    ngInventory = []
-    ngAggression = 50
-    ngAwareness = 20
-    ngFear = 90
-    ngMXHealth = 20
-        
-elif namePart2 == 5:
-    name2 = nameSpecies[4]
-    ngSpeed = 12
-    ngStamina = 30
-    ngStrength = 8
-    ngIntelligence = 20
-    ngDexterity = 12
-    ngNumberOfPotions = 3
-    ngInventory = []
-    ngAggression = 40
-    ngAwareness = 90
-    ngFear = 30
-    ngMXHealth = 60
-        
-elif namePart2 == 6:
-    name2 = nameSpecies[5]
-    ngSpeed = 25
-    ngStamina = 25
-    ngStrength = 8
-    ngIntelligence = 8
-    ngDexterity = 8
-    ngNumberOfPotions = 2
-    ngInventory = []
-    ngAggression = 80
-    ngAwareness = 30
-    ngFear = 20
-    ngMXHealth = 40
-
-        
 if namePart1 == 1:
     firstPart = adjectName[0]
-    ngAggression = ngAggression - 10
+    ngAggression =  -10
         
 elif namePart1 == 2:
     firstPart = adjectName[1]
@@ -143,4 +60,4 @@ elif namePart1 == 8:
     ngAwareness = ngAwareness + 20
     ngFear = ngFear - randint(5, 15)
 
-ngName = firstPart
+ngName = adjectName[namePart1]

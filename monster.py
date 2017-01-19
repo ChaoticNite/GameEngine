@@ -19,7 +19,6 @@
 from namegene import *
 from character import *
 from random import randint, choice
-from GameEngine import isOver
 
 class Monster(Character):
     ''' generic monster class '''
@@ -62,12 +61,12 @@ class Monster(Character):
             '''
                
         
-         attackValue = randint(1,100) + self.aggression
-         healValue = randint(1,100) + self.awareness
-         fleeValue = randint(1,100) + self.fear
+        attackValue = randint(1,100) + self.aggression
+        healValue = randint(1,100) + self.awareness
+        fleeValue = randint(1,100) + self.fear
          
-        if spRate <= 2:
-             attackValue = attackValue/(spRate/2)
+        if int(self.spRate) <= 2:
+             if attackValue == attackValue/(spRate/2):
                  return "a"
              elif healValue >= attackValue and healValue >= fleeValue:
                  return "h"
@@ -75,18 +74,18 @@ class Monster(Character):
                  return "f"
              else:
                  return "AI_error"
-         elif spRate >= 3:
+        elif int(self.spRate) >= 3:
              return "respone"
             
-         elif spRate = 5:
-             return "response"
+        elif int(self.spRate) == 5:
+             return "done"
             
         
 class Orc(Monster):
     ''' generic Orc class
 
         this class '''
-    def __init__(self, AGRBonus = ngAggression,
+    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
                  AWRBonus = ngAwareness, FRBonus = ngFear,
                  name = "Dorque da Orc"):
         orcName = name
@@ -115,7 +114,7 @@ class Moblin(Character):
     ''' a greedy violent creature ''' 
     def __init__(self, firstPart = " ", AGRBonus = ngAggression,
                  AWRBonus = ngAwareness, FRBonus = ngFear, name = "Moblin"):
-        moblinName = fristPart + name
+        moblinName = firstPart + name
         speed = 25
         stamina = 25
         strength = 8
@@ -173,7 +172,7 @@ class Minotaur(Character):
     ''' A Heavy Hitting type monster. '''
     def __init__(self, firstPart = " ", AGRBonus = ngAggression,
                  AWRBonus = ngAwareness, FRBonus = ngFear, name = "Minotaur"):
-        minoName = fristPart + name
+        minoName = firstPart + name
         speed = 50
         stamina = 40
         strength = 15
@@ -260,6 +259,6 @@ if __name__ == "__main__":
     grr = Orc()
     print(grr.name, grr.spRate)
     
-    Randy = random_monster(firstPart = ngName, ngAggression, ngFear,
-                           ngAwareness)
-    #print(Randy.name)
+    Randy = random_monster(firstPart = ngName, ARGBonus = ngAggression,
+                           FRBonus = ngFear,AWRBonus = ngAwareness)
+    print(Randy.name, Randy.aggression)

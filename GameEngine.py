@@ -34,7 +34,12 @@ def combat(one, two):
             success, message = current.take()
 
         elif choice == "response":
-            success, message = current.respone()          
+            success, message = current.respone()
+
+        elif choice == "done":
+            isOver = True
+            message = current.name + "no longer wishes to fight." +\
+                      "\n" + target.name + "lives through brains!"
 
         else:
             success, message = current.attack(target)
@@ -264,7 +269,7 @@ if __name__ == "__main__":
     print(hero)
     hero2 = hero
     #hero = Character()
-    orc = Monster(name = "Dorque da Orc")
+    orc = random_monster()
 
     combat(hero, orc)
 
