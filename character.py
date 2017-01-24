@@ -66,7 +66,7 @@ class Character(object):
         self.imageFileName = imageFileName
         self.spRate = spRate
         self.inventory = []
-        for item in range(inventory):
+        for item in range(len(self.inventory)):
             self.inventory.append(item[:])
         self.potions = []
         for i in range(numberOfPotions):
@@ -295,6 +295,9 @@ class Character(object):
 
             if spareOp == 3:
                 message = "Then why the challenge?"
+
+        elif enemy.spRate == 7:
+            message = "I care not anymore"
             
                             
 

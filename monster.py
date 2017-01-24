@@ -16,7 +16,7 @@
 
 
 ''' Monster Package '''
-from namegene import *
+import namegene as ng
 from character import *
 from random import randint, choice
 
@@ -40,13 +40,12 @@ class Monster(Character):
                  fear = 50,
                  imageFileName = "Blob.gif",
                  spRate = 0,
-                 spare = randint(1,3),
                  weapon = ""):
         super(Monster, self).__init__(name, maxHealth, speed, stamina,
                                       strength, dexterity, constitution,
                                       intelligence, wisdom, charisma,
                                       numberOfPotions, inventory, imageFileName,
-                                      spRate, spare, weapon)
+                                      spRate, weapon)
         self.aggression = aggression
         self.awareness = awareness
         self.fear = fear  #indicates cowardice level
@@ -85,8 +84,8 @@ class Orc(Monster):
     ''' generic Orc class
 
         this class '''
-    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
-                 AWRBonus = ngAwareness, FRBonus = ngFear,
+    def __init__(self, firstPart = ng.ngName, AGRBonus = ng.ngAggression,
+                 FRBonus = ng.ngFear, AWRBonus = ng.ngAwareness,
                  name = "Dorque da Orc"):
         orcName = name
         maxHealth = randint(1,8)
@@ -100,8 +99,8 @@ class Orc(Monster):
         charisma = 10
         numberOfPotions = 2
         inventory = []
-        aggression = 80 + AGRBonus
-        awareness = 30 + AWRBonus
+        aggression = 80 + ng.ngAggression,
+        awareness = 30 + ng.ngAwareness
         fear = 20 + FRBonus
         spRate = 0
         super(Orc, self).__init__(orcName, maxHealth, speed, stamina, strength,
@@ -112,26 +111,31 @@ class Orc(Monster):
 class Moblin(Character):
     
     ''' a greedy violent creature ''' 
-    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
-                 AWRBonus = ngAwareness, FRBonus = ngFear, name = "Moblin"):
-        moblinName = firstPart + name
-        speed = 25
-        stamina = 25
-        strength = 8
-        intelligence = 8
-        dexterity = 8
-        numberOfPotions = 2
-        inventory = []
-        aggression = 80
-        awareness = 30
-        fear = 20
-        risk = 20
-        maxHealth = 100
-        spRate = 0
-        super(Moblin, self).__init__(moblinName, maxHealth, speed, stamina,
-                                     strength, dexterity, intelligence,
-                                     numberOfPotions,
-                                     aggression, awareness, fear, risk, spRate)
+    def __init__(self,
+                 name = ng.ngName + "Moblin",
+                 speed = 25 + ng.ngSpeed,
+                 stamina = 25,
+                 strength = 8,
+                 intelligence = 8 + ng.ngIntelligence,
+                 dexterity = 8,
+                 constitution = 10,
+                 wisdom = 10,
+                 charisma = 10,
+                 numberOfPotions = 2,
+                 inventory = [],
+                 aggression = 80 + ng.ngAggression,
+                 awareness = 30 + ng.ngAwareness,
+                 fear = 20 + ng.ngFear,
+                 risk = 20,
+                 maxHealth = 100,
+                 spRate = 0,
+                 imageFileName = "Blob.gif",
+                 weapon = ""):
+        super(Moblin, self).__init__(name, maxHealth, speed, stamina,
+                                      strength, dexterity, constitution,
+                                      intelligence, wisdom, charisma,
+                                      numberOfPotions, inventory, imageFileName,
+                                      spRate, weapon)
 
     def combat_choice(self):
         ''' combat AI
@@ -170,25 +174,31 @@ class Moblin(Character):
 class Minotaur(Character):
 
     ''' A Heavy Hitting type monster. '''
-    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
-                 AWRBonus = ngAwareness, FRBonus = ngFear, name = "Minotaur"):
-        minoName = firstPart + name
-        speed = 50
-        stamina = 40
-        strength = 15
-        intelligence = 2
-        dexterity = 9
-        numberOfPotions = 1
-        inventory = []
-        aggression = 95
-        awareness = 60
-        fear = 10
-        maxHealth = 60
-        spRate = 0
-        super(Minotaur, self).__init__(name, minoName, maxHealth, speed, stamina,
-                                       strength, dexterity, intelligence,
-                                       numberOfPotions,
-                                       aggression, awareness, fear, spRate)
+    def __init__(self,
+                 name = ng.ngName + "Minotaur",
+                 speed = 50 + ng.ngSpeed,
+                 stamina = 40,
+                 strength = 15,
+                 intelligence = 2 + ng.ngIntelligence,
+                 dexterity = 9,
+                 constitution = 10,
+                 wisdom = 6,
+                 charisma = 10,
+                 numberOfPotions = 1,
+                 inventory = [],
+                 aggression = 95 + ng.ngAggression,
+                 awareness = 60 + ng.ngAwareness,
+                 fear = 10 + ng.ngFear,
+                 risk = 20,
+                 maxHealth = 60,
+                 spRate = 0,
+                 imageFileName = "Blob.gif",
+                 weapon = ""):
+        super(Minotaur, self).__init__(name, maxHealth, speed, stamina,
+                                      strength, dexterity, constitution,
+                                      intelligence, wisdom, charisma,
+                                      numberOfPotions, inventory, imageFileName,
+                                      spRate, weapon)
 
     def combat_choice(self):
         ''' Combat AI for Minotaur
@@ -210,8 +220,8 @@ class Minotaur(Character):
 class Raptor(Monster):
 
     ''' An intelligent creature that just happens to be a talking dinosaur.'''
-    def __init__(self, firstPart = " ", AGRBonus = ngAggression,
-                 AWRBonus = ngAwareness, FRBonus = ngFear,
+    def __init__(self, firstPart = ng.ngName, AGRBonus = ng.ngAggression,
+                 FRBonus = ng.ngFear, AWRBonus = ng.ngAwareness,
                  name = "Raptor"):
         rapName = firstPart + name
         speed = 42
@@ -250,15 +260,14 @@ def random_monster():
     raptor = Raptor()
     
     
-    listOfMonsters = [monster, orc, moblin]
+    listOfMonsters = [monster, orc, moblin, raptor, minotaur]
     return choice(listOfMonsters)
 
 
 if __name__ == "__main__":
 
-    grr = Orc()
-    print(grr.name, grr.spRate)
+    #grr = Orc()
+    #print(grr.name, grr.spRate)
     
-    Randy = random_monster(firstPart = ngName, ARGBonus = ngAggression,
-                           FRBonus = ngFear,AWRBonus = ngAwareness)
+    Randy = Moblin()
     print(Randy.name, Randy.aggression)
