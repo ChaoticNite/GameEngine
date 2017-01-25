@@ -87,7 +87,7 @@ class Orc(Monster):
     def __init__(self, firstPart = ng.ngName, AGRBonus = ng.ngAggression,
                  FRBonus = ng.ngFear, AWRBonus = ng.ngAwareness,
                  name = "Dorque da Orc"):
-        orcName = name
+        orcName = firstPart, name
         maxHealth = randint(1,8)
         speed = 25
         stamina = 25
@@ -112,20 +112,20 @@ class Moblin(Character):
     
     ''' a greedy violent creature ''' 
     def __init__(self,
-                 name = ng.ngName + "Moblin",
-                 speed = 25 + ng.ngSpeed,
+                 name = ng.ngName + " Moblin",
+                 speed = 25,
                  stamina = 25,
                  strength = 8,
-                 intelligence = 8 + ng.ngIntelligence,
+                 intelligence = 8,
                  dexterity = 8,
                  constitution = 10,
                  wisdom = 10,
                  charisma = 10,
                  numberOfPotions = 2,
                  inventory = [],
-                 aggression = 80 + ng.ngAggression,
-                 awareness = 30 + ng.ngAwareness,
-                 fear = 20 + ng.ngFear,
+                 aggression = 80,
+                 awareness = 30,
+                 fear = 20,
                  risk = 20,
                  maxHealth = 100,
                  spRate = 0,
@@ -175,20 +175,20 @@ class Minotaur(Character):
 
     ''' A Heavy Hitting type monster. '''
     def __init__(self,
-                 name = ng.ngName + "Minotaur",
-                 speed = 50 + ng.ngSpeed,
+                 name = ng.ngName +  " Minotaur",
+                 speed = 50,
                  stamina = 40,
                  strength = 15,
-                 intelligence = 2 + ng.ngIntelligence,
+                 intelligence = 2,
                  dexterity = 9,
                  constitution = 10,
                  wisdom = 6,
                  charisma = 10,
                  numberOfPotions = 1,
                  inventory = [],
-                 aggression = 95 + ng.ngAggression,
-                 awareness = 60 + ng.ngAwareness,
-                 fear = 10 + ng.ngFear,
+                 aggression = 95,
+                 awareness = 60,
+                 fear = 10,
                  risk = 20,
                  maxHealth = 60,
                  spRate = 0,
@@ -270,4 +270,4 @@ if __name__ == "__main__":
     #print(grr.name, grr.spRate)
     
     Randy = Moblin()
-    print(Randy.name, Randy.aggression)
+    print(Randy.name)

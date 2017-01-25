@@ -25,6 +25,7 @@ class Combat(tk.Frame):
         self.columnconfigure(2, weight = 1)
         self.columnconfigure(0, weight = 1)
         self.rowconfigure(4, weight = 1)
+        self.rowconfigure(5, weight = 1)
         self.create_widgets()
         
 
@@ -59,15 +60,16 @@ class Combat(tk.Frame):
         #Row-4
         self.heroHealthLbl = tk.Label(text = str(self.player.health) + "/" + str(self.player.maxHealth),
                                       width = 20)
-        self.invBttn = tk.Button(self, height = 35, text = "Inventory")
+        self.invBttn = tk.Button(self, height = 5, text = "Inventory")
         self.enemyHealthLbl = tk.Label(text = str(self.enemy.health) + "/" + str(self.enemy.maxHealth),
                                        width = 20)
         self.heroHealthLbl.grid(row = 4, column = 0, sticky = (tk.E + tk.W))
-        self.invBttn.grid(row = 4, column = 1, sticky = (tk.E + tk.W))
+        self.invBttn.grid(row = 4, column = 1, sticky = (tk.E + tk.W + tk.N))
         self.enemyHealthLbl.grid(row = 4, column = 2, sticky = (tk.E + tk.W))
 
         #Row-5
-        #self.logBox = tk.Textbox(self, 
+        #self.logBox = tk.Textbox(self, text = self.player.strength)
+        #self.logBox.grid(row = 5, column = 0, sticky = tk.E)
 
 root = tk.Tk()
 root.title("Combat")
