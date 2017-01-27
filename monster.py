@@ -269,5 +269,5 @@ if __name__ == "__main__":
     #grr = Orc()
     #print(grr.name, grr.spRate)
     
-    Randy = Moblin()
-    print(Randy.name)
+    Randy = Monster()
+    print(Randy.name, Randy.imageFileName)
