@@ -269,8 +269,8 @@ if __name__ == "__main__":
     print(hero)
     hero2 = hero
     #hero = Character()
-    orc = random_monster()
+    rnMonster = random_monster()
 
-    combat(hero, orc)
+    combat(hero, rnMonster)
 
     

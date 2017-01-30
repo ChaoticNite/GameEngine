@@ -9,21 +9,15 @@ from GameEngine import *
 import character as ch
 from monster import *
 
-TITLE_FONT = ("Helvetica", 20, "bold")
-HEADING1_FONT = ("Helvetica", 16, "bold")
-TABLE_FONT = ("Arial", 10, "bold")
-INSTRUCTION_FONT = ("Helvetica", 14, "bold")
-LOG_EXAMPLE = ("You are now in Combat.\nWhat are you going to do next?")
-
 class RootApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
-        container.pack(side="top", fill="both", expand=True)
-        container.grid_rowconfigure(0, weight=1)
+        container.grid(row = 0, column = 0, sticky = (tk.NSEW))
+        container.grid_rowconfigure(0, weight=0)
         container.grid_columnconfigure(0, weight=1)
         self.frames = {}
-        for F in [CombatSystem, Inventory]:
+        for F in [Combat, Inventory]:
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -32,30 +26,29 @@ class RootApp(tk.Tk):
             # the one on the top of the stacking order
             # will be the one that is visible.
             frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame("CombatSystem")
+        self.show_frame("Combat")
     def show_frame(self, page_name):
         frame = self.frames[page_name]
         frame.tkraise()
         
 class Combat(tk.Frame):
     
-    def __init__(self,master):
+    def __init__(self, parent, controller):
         
-        tk.Frame.__init__(self)
+        tk.Frame.__init__(self, parent)
 
         #Creates a monster and player.
         self.player = ch.Character()
         self.enemy = Monster()
         self.frame = tk.Frame(self, relief = "sunken", width = 1024, height = 1024)
         self.frame.grid(column = 0, row = 0, columnspan = 4, rowspan = 5)
-
+        self.controller = controller
         self.grid()
+        self.create_widgets()
+        self.columnconfigure(0, weight = 1)
         self.columnconfigure(1, weight = 1)
         self.columnconfigure(2, weight = 1)
-        self.columnconfigure(0, weight = 1)
-        self.rowconfigure(4, weight = 1)
-        self.rowconfigure(5, weight = 1)
-        self.create_widgets()
+        self.rowconfigure(1, weight = 0)
         
 
     def create_widgets(self):
@@ -77,8 +70,8 @@ class Combat(tk.Frame):
         self.enemyLbl = tk.Label(self, image = self.enemyImage)
         self.enemyLbl.image = self.enemyImage
         self.attkBttn.grid(row = 1, column = 1, sticky = (tk.E + tk.W))
-        #self.heroLbl.grid(row = 1, column = 0, rowspan = 5, sticky = (tk.W + tk.N))
-        #self.enemyLbl.grid(row = 1, column = 2, rowspan = 5, sticky = (tk.E + tk.N))
+        self.heroLbl.grid(row = 1, column = 0, rowspan = 5, sticky = (tk.W + tk.N))
+        self.enemyLbl.grid(row = 1, column = 2, rowspan = 5, sticky = (tk.E + tk.N))
 
         #Row-2
         self.healImage = tk.PhotoImage(file = "heal.gif")
@@ -110,13 +103,42 @@ class Combat(tk.Frame):
         self.logBox.insert(0.0, self.player.strength)
         self.logBox.grid(row = 6, column = 0, sticky = tk.E)
 
+class Inventory(tk.Frame):
+    def __init__(self, parent, controller):
+        """ Initialize the frame. """
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        self.grid()
+        self.create_widgets()
+        self.columnconfigure(0, weight=1)
+        self.columnconfigure(1, weight=1)
+        self.columnconfigure(2, weight=1)
+        self.columnconfigure(3, weight=1)
+        #self.rowconfigure(0, weight=int(0.1))
+        #self.rowconfigure(1, weight=int(0.1))
+        #self.rowconfigure(2, weight=int(0.1))
+        #self.rowconfigure(3, weight=int(0.1))
 
+    def create_widgets(self):
+        you = tk.PhotoImage(file = "Roy.gif")
+
+        #Close button
+        self.closeBttn = tk.Button(self, text = "Close",
+                             command = lambda: self.controller.show_frame("CombatSystem"))
+        self.closeBttn.grid()
+
+        potionsLbl = tk.Label(self, text = "Potions =")
+        potionsLbl.grid(row = 1, column = 1)
+
+        potionsNum = tk.Label(self, text = "#")
+        potionsNum.grid(row = 1, column = 2)
+        
 #main    
-root = tk.Tk()
+root = RootApp()
 root.title("Combat")
 root.geometry("1024x1024+250+250")
-app = Combat(root)
-app.grid()
+root.grid()
+root.mainloop()
 
         
 

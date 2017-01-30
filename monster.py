@@ -65,7 +65,7 @@ class Monster(Character):
         fleeValue = randint(1,100) + self.fear
          
         if int(self.spRate) <= 2:
-             if attackValue == attackValue/(spRate/2):
+             if attackValue == attackValue/(self.spRate/2):
                  return "a"
              elif healValue >= attackValue and healValue >= fleeValue:
                  return "h"
@@ -255,12 +255,12 @@ def random_monster():
     
     monster = Monster()
     orc = Orc()
-    moblin = Moblin()
-    minotaur = Minotaur()
+    #moblin = Moblin()
+    #minotaur = Minotaur()
     raptor = Raptor()
     
     
-    listOfMonsters = [monster, orc, moblin, raptor, minotaur]
+    listOfMonsters = [monster, orc, raptor]
     return choice(listOfMonsters)
 
 

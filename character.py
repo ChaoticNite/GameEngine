@@ -66,6 +66,9 @@ class Character(object):
         self.imageFileName = imageFileName
         self.spRate = spRate
         self.inventory = []
+        self.armorDef = random.randint(1, 3)
+        self.weapAttk = random.randint(1, 3)
+        self.weapDamage = random.randint(1,3)
         for item in range(len(self.inventory)):
             self.inventory.append(item[:])
         self.potions = []
@@ -77,8 +80,11 @@ class Character(object):
             self.weapon = Weapon()
         if armor == "":
             self.armor = Armor()
+            self.armorDef = self.armor.defense
+            self.weapAttk = self.weapon.attack
+            self.weapDamage = self.weapon.damage
         else:
-            self.armor = Armor()
+            self.armor = armor
 
     @property
     def strBonus(self):
@@ -128,7 +134,7 @@ class Character(object):
     @property
     def AC(self):
         ''' calculates the overall d20 OGL Armor Class (AC) value'''
-        return 10 + self.dexBonus + self.armor.defense
+        return 10 + self.dexBonus + self.armorDef
 
     def get_damaged(self, damage):
         ''' inflicts damage from an outside source '''
@@ -207,9 +213,9 @@ class Character(object):
             message = self.name + "fumbles their attack!"
 
 
-        attack = randint(1,20) + self.strBonus + self.weapon.attack
+        attack = randint(1,20) + self.strBonus + self.weapAttk
         if attack >= enemy.AC:
-            damage = self.weapon.damage + self.strBonus
+            damage = self.weapDamage + self.strBonus
             if damage < 1:
                 damage = 1
             enemy.health -= damage
@@ -218,9 +224,9 @@ class Character(object):
                       str(damage) + " damage."
 
         else:
-            attack = roll + self.strBonus + self.weapon.attack
+            attack = roll + self.strBonus + self.weapAttk
             if attack >= enemy.AC:
-                damage = self.weapon.damage + self.strBonus
+                damage = self.weapDamage + self.strBonus
                 if damage < 1:
                     damage = 1
                 enemy.get_damaged(damage)
@@ -352,21 +358,3 @@ if __name__ == "__main__":
     print(hero.attack(orc))
     print(hero)
     print(orc)
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
