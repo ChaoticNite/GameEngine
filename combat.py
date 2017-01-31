@@ -13,9 +13,10 @@ class RootApp(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
+        container.pack(side = "top", fill = "both", expand = True)
         container.grid(row = 0, column = 0, sticky = (tk.NSEW))
-        container.grid_rowconfigure(0, weight=0)
-        container.grid_columnconfigure(0, weight=1)
+        container.grid_rowconfigure(0, weight = 0)
+        container.grid_columnconfigure(0, weight = 1)
         self.frames = {}
         for F in [Combat, Inventory]:
             page_name = F.__name__
@@ -48,7 +49,7 @@ class Combat(tk.Frame):
         self.columnconfigure(0, weight = 1)
         self.columnconfigure(1, weight = 1)
         self.columnconfigure(2, weight = 1)
-        self.rowconfigure(1, weight = 0)
+        self.rowconfigure(0, weight = 0)
         
 
     def create_widgets(self):
@@ -70,8 +71,8 @@ class Combat(tk.Frame):
         self.enemyLbl = tk.Label(self, image = self.enemyImage)
         self.enemyLbl.image = self.enemyImage
         self.attkBttn.grid(row = 1, column = 1, sticky = (tk.E + tk.W))
-        self.heroLbl.grid(row = 1, column = 0, rowspan = 5, sticky = (tk.W + tk.N))
-        self.enemyLbl.grid(row = 1, column = 2, rowspan = 5, sticky = (tk.E + tk.N))
+        self.heroLbl.grid(row = 1, column = 0, rowspan = 10, sticky = (tk.W + tk.N))
+        self.enemyLbl.grid(row = 1, column = 2, rowspan = 10, sticky = (tk.E + tk.N))
 
         #Row-2
         self.healImage = tk.PhotoImage(file = "heal.gif")
@@ -91,11 +92,11 @@ class Combat(tk.Frame):
         #Row-5
         self.heroHealthLbl = tk.Label(text = str(self.player.health) + "/" + str(self.player.maxHealth),
                                       width = 20)
-        self.invBttn = tk.Button(self, height = 5, text = "Inventory")
+        self.invBttn = tk.Button(self, height = 35, text = "Inventory")
         self.enemyHealthLbl = tk.Label(text = str(self.enemy.health) + "/" + str(self.enemy.maxHealth),
                                        width = 20)
         self.heroHealthLbl.grid(row = 5, column = 0)
-        self.invBttn.grid(row = 5, column = 1, sticky = (tk.E + tk.W + tk.N))
+        self.invBttn.grid(row = 5, column = 1, sticky = (tk.E + tk.W))
         self.enemyHealthLbl.grid(row = 5, column = 2)
 
         #Row-6
@@ -114,10 +115,6 @@ class Inventory(tk.Frame):
         self.columnconfigure(1, weight=1)
         self.columnconfigure(2, weight=1)
         self.columnconfigure(3, weight=1)
-        #self.rowconfigure(0, weight=int(0.1))
-        #self.rowconfigure(1, weight=int(0.1))
-        #self.rowconfigure(2, weight=int(0.1))
-        #self.rowconfigure(3, weight=int(0.1))
 
     def create_widgets(self):
         you = tk.PhotoImage(file = "Roy.gif")
